@@ -48,7 +48,18 @@ Route::post('/booking', [BookingsController::class, 'booking']);
 Route::post('/bookings', [BookingsController::class, 'store']);
 Route::get('/my_bookings', [BookingsController::class, 'my_bookings']);
 
+/* Company Routes */
+Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name('company.dashboard')->middleware('company');
 
+Route::get('/company/signup', [CompanyController::class, 'show_signup'])->name('company.signup');
+
+Route::get('/company/login', [CompanyController::class, 'show_login'])->name('company.login');
+
+Route::post('/company/register/new', [CompanyController::class, 'register'])->name('company.register');
+
+Route::post('/company/authenticate', [CompanyController::class, 'authenticate'])->name('company.authenticate');
+
+Route::get('/company/logout', [CompanyController::class, 'logout'])->name('company.logout');
 
 
 
