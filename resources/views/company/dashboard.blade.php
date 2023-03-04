@@ -14,6 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 @extends('company.master')
+@section('title','Company Dashboard')
 @section('content')
   <body class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
     <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
@@ -33,7 +34,7 @@
       <div class="items-center block w-auto max-h-screen overflow-auto h-sidenav grow basis-full">
         <ul class="flex flex-col pl-0 mb-0">
           <li class="mt-0.5 w-full">
-            <a class="py-2.7 bg-blue-500/13 dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors" href="../pages/dashboard.html">
+            <a class="py-2.7 bg-blue-500/13 dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors" href="/company/dashboard">
               <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-tv-2"></i>
               </div>
@@ -42,7 +43,7 @@
           </li>
 
           <li class="mt-0.5 w-full">
-            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="../pages/tables.html">
+            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="/company/buses">
               <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
               </div>
@@ -51,7 +52,7 @@
           </li>
 
           <li class="mt-0.5 w-full">
-            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="../pages/billing.html">
+            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="/company/routes">
               <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0 text-sm leading-normal text-emerald-500 ni ni-credit-card"></i>
               </div>
@@ -60,7 +61,7 @@
           </li>
 
           <li class="mt-0.5 w-full">
-            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="../pages/virtual-reality.html">
+            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="/company/schedules">
               <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-app"></i>
               </div>
@@ -91,22 +92,14 @@
           </li>
 
           <li class="mt-0.5 w-full">
-            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="../pages/sign-in.html">
+            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="/company/logout">
               <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                 <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-single-copy-04"></i>
               </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Sign In</span>
+              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Log Out</span>
             </a>
           </li>
 
-          <li class="mt-0.5 w-full">
-            <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="../pages/sign-up.html">
-              <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-collection"></i>
-              </div>
-              <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Sign Up</span>
-            </a>
-          </li>
         </ul>
       </div>
 
@@ -117,14 +110,14 @@
           <img class="w-1/2 mx-auto" src="{{ asset('template/assets/img/illustrations/icon-documentation.svg') }}" alt="sidebar illustrations" />
           <div class="flex-auto w-full p-4 pt-0 text-center">
             <div class="transition-all duration-200 ease-nav-brand">
-              <h6 class="mb-0 dark:text-white text-slate-700">Need help?</h6>
-              <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Please check our docs</p>
+              <h6 class="mb-0 dark:text-white text-slate-700">Done Work?</h6>
+              <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Go back to site</p>
             </div>
           </div>
         </div>
-        <a href="https://www.creative-tim.com/learning-lab/tailwind/html/quick-start/argon-dashboard/" target="_blank" class="inline-block w-full px-8 py-2 mb-4 text-xs font-bold leading-normal text-center text-white capitalize transition-all ease-in rounded-lg shadow-md bg-slate-700 bg-150 hover:shadow-xs hover:-translate-y-px">Documentation</a>
+        <a href="/" class="inline-block w-full px-8 py-2 mb-4 text-xs font-bold leading-normal text-center text-white capitalize transition-all ease-in rounded-lg shadow-md bg-slate-700 bg-150 hover:shadow-xs hover:-translate-y-px">Visit Home Page</a>
         <!-- pro btn  -->
-        <a class="inline-block w-full px-8 py-2 text-xs font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md select-none bg-150 bg-x-25 hover:shadow-xs hover:-translate-y-px" href="https://www.creative-tim.com/product/argon-dashboard-pro-tailwind?ref=sidebarfree" target="_blank">Upgrade to pro</a>
+        <a class="inline-block w-full px-8 py-2 text-xs font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md select-none bg-150 bg-x-25 hover:shadow-xs hover:-translate-y-px" href="/company/logout">Logout</a>
       </div>
     </aside>
 

@@ -71,7 +71,7 @@ class SchedulesController extends Controller
         
         else{
             Schedule::create($formFields);
-            return redirect('/schedules')->with('message', "Schedule created successfully!");
+            return redirect('/company/schedules')->with('message', "Schedule created successfully!");
 
         }
 
@@ -123,7 +123,7 @@ class SchedulesController extends Controller
         }
         $schedule->update($formFields);
 
-        return redirect('/schedules')->with('message', "Schedule updated successfully!");
+        return redirect('/company/schedules')->with('message', "Schedule updated successfully!");
     }
 
     /**

@@ -1,5 +1,5 @@
 @extends('company.master')
-
+@section('title','Register Company')
 @section('content')
     
 <body class="m-0 font-sans antialiased font-normal bg-white text-start text-base leading-default text-slate-500">

@@ -17,6 +17,7 @@
                             <select name="from">
                                 <option>--Select</option>
                                 <option value="Kathmandu">Kathmandu</option>
+                                <option value="Nawalpur">Nawalpur</option>
                                 <option value="Pokhara">Pokhara</option>
                                 <option value="Biratnagar">Biratnagar</option>
                                 <option value="Bharatpur">Bharatpur</option>

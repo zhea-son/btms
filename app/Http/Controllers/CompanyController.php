@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bus;
+use App\Models\Route;
 use App\Models\Company;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -25,9 +28,6 @@ class CompanyController extends Controller
 
     public function register(Request $request){
 
-        
-        
-        
         $validator = Validator::make($request->all(), [
             'company_name' => ['required','min:3'],
             'email' => ['required','email',Rule::unique('companies','email')],
@@ -82,6 +82,27 @@ class CompanyController extends Controller
         Auth::guard('company')->logout();
         return redirect()->route('company.login');
 
+    }
+
+    public function my_buses(){
+        $company = Auth::guard('company')->user();
+        $buses = Bus::all();
+        return view('company.buses', ['company' => $company], compact('buses'));
+    }
+
+    public function my_routes(){
+        $company = Auth::guard('company')->user();
+        $routes = Route::all();
+        return view('company.routes', ['company' => $company], compact('routes'));
+    }
+
+    public function my_schedules(){
+        $company = Auth::guard('company')->user();
+        
+        return view('company.schedules', [
+            'company' => $company,
+            'schedules' => Schedule::with(['bus','route'])->get()
+    ]);
     }
 
 }
