@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Route extends Model
 {
@@ -25,6 +26,10 @@ class Route extends Model
 
     public function schedules(){
         return $this->hasMany(Schedule::class, 'route_id');
+    }
+
+    public function company(){
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
 }

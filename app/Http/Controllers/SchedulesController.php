@@ -7,6 +7,7 @@ use App\Models\Bus;
 use App\Models\Route;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SchedulesController extends Controller
 {
@@ -31,10 +32,8 @@ class SchedulesController extends Controller
      */
     public function create()
     {
-        $buses = Bus::all();
-        $routes = Route::all();
-
-        
+        $buses = Auth::guard('company')->user()->buses;
+        $routes = Auth::guard('company')->user()->routes;
 
         return view('schedules.create',compact('buses','routes'));
     }
@@ -58,6 +57,8 @@ class SchedulesController extends Controller
         foreach ($formFields as &$value) {
             $value = strip_tags($value);
         }
+
+        $formFields['company_id'] = Auth::guard('company')->user()->id;
 
         $schedule = Schedule::where('bus_id', $formFields['bus_id'])
                                 ->where('route_id', $formFields['route_id'])

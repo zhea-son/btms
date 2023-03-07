@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('buses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->string('number_plate')->unique();
             $table->string('type');
             $table->string('seats');
-            // $table->string('available_seats');
             $table->string('contact');
             $table->string('image')->nullable();
             $table->timestamps();

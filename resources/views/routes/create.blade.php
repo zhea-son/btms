@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('company.master')
 
 @section('title','Create Route')
 

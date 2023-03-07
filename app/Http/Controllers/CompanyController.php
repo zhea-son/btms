@@ -86,23 +86,25 @@ class CompanyController extends Controller
 
     public function my_buses(){
         $company = Auth::guard('company')->user();
-        $buses = Bus::all();
+        $buses =  Bus::where('company_id',$company->id)->get();
         return view('company.buses', ['company' => $company], compact('buses'));
+     
     }
 
     public function my_routes(){
         $company = Auth::guard('company')->user();
-        $routes = Route::all();
+        $routes = Route::where('company_id',$company->id)->get();
         return view('company.routes', ['company' => $company], compact('routes'));
     }
 
     public function my_schedules(){
         $company = Auth::guard('company')->user();
+        $schedules =  Schedule::with(['bus','route'])->where('company_id',$company->id)->get();
+
         
         return view('company.schedules', [
             'company' => $company,
-            'schedules' => Schedule::with(['bus','route'])->get()
-    ]);
+    ], compact('schedules'));
     }
 
 }

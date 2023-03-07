@@ -242,7 +242,7 @@
   
         <!-- end Navbar -->
 
-        <div class="w-full px-6 py-6 mx-auto">
+        {{-- <div class="w-full px-6 py-6 mx-auto">
             <!-- table 1 -->
     
             <div class="flex flex-wrap -mx-3">
@@ -329,6 +329,111 @@
               </div>
             </div>
         </div>
+
+        </div> --}}
+
+        <div class="w-full px-6 py-6 mx-auto">
+          <!-- table 1 -->
+  
+          <div class="flex flex-wrap -mx-3">
+            <div class="flex-none w-full max-w-full px-3">
+              <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border flex justify-end">
+                <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+                  <h6 class="dark:text-white">Schedules table</h6>
+                  <a class="flex text-red bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"  href="/schedules/create"><p>Add Schedule</p></a>
+                </div>
+
+                <div class="flex-auto px-0 pt-0 pb-2">
+                  <div class="p-0 overflow-x-auto">
+                    <table class="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
+                      <thead class="align-bottom">
+                        <tr>
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Date</th>
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Route</th>
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Type</th>
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Departure Time</th>
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Fare</th>
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Tags</th>
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>
+                          
+                          @if(count($schedules) == 0)
+                              <p>No Schedules found!</p>
+                          @endif
+                        </td></tr>
+                          @foreach ($schedules as $schedule)
+                        <tr>
+                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <span class="">{{ $schedule->date }}</span>
+                          </td>
+                          <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <div class="flex px-2 py-1">
+                              <div class="flex flex-col justify-center">
+                                <h6 class="mb-0 text-sm leading-normal dark:text-white">{{ $schedule->route->name }}</h6>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <li class="bg-gradient-to-tl from-emerald-500 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white"><a href="/buses/?type={{$schedule->bus->type}}">{{$schedule->bus->type}}</a></li>
+                          </td>
+                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <span class="">{{ $schedule->departure_time }}</span>
+                          </td>
+                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <span class="">{{ $schedule->fare }}</span>
+                          </td>
+                          <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <li class="bg-gradient-to-tl from-emerald-500 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white"><a href="/buses/?type={{$schedule->route->origin}}">{{$schedule->route->origin}}</a></li>
+                            <li class="bg-gradient-to-tl from-emerald-500 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white"><a href="/buses/?type={{$schedule->route->destination}}">{{$schedule->route->destination}}</a></li>
+                            <li class="bg-gradient-to-tl from-emerald-500 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white"><a href="/buses/?type={{$schedule->route->via}}">{{$schedule->route->via}}</a></li>
+                          </td>
+                          <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                              <ul class="flex">
+                                <li
+                                    class="text-blue-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
+                                >
+                                    <a href="/schedules/{{$schedule->id}}/edit">Edit</a>
+                                </li>
+                                <li
+                                    class="text-red-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
+                                >
+                                <form method="POST" action="/schedules/{{$schedule->id}}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit">Delete</button>        
+                                  </form>
+                                </li>
+                                <li
+                                    class="text-gray-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
+                                >
+                                    <a href="#">Set Return Trip!</a>
+                                </li>
+                                <li
+                                    class="text-emerald-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
+                                >
+                                    <a href="#">Trip Completed!</a>
+                                </li>
+                                </ul>
+                            </span>
+                          </td>
+                         
+                        </tr>
+                        <tr>
+                        </tr>
+                        @endforeach
+                        
+                      </tbody>
+                  </table>
+                  </div>
+              </div>
+          </div>
+            </div>
+          </div>
+      </div>
+
     </main>
 </body>
 

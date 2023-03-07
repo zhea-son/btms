@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bus;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BusesController extends Controller
 {
@@ -19,7 +21,7 @@ class BusesController extends Controller
         // return view('buses.index', compact('buses'));
         return view('buses.index', [
             // 'buses' => Bus::latest()->filter(request(['to','from','type']))->Simplepaginate(6)
-            'buses' => Bus::latest()->filter(request(['type']))->Simplepaginate(6)
+            'schedules' => Schedule::latest()->filter(request(['place','type']))->Simplepaginate(9)
         ]);
     }
 
@@ -62,12 +64,14 @@ class BusesController extends Controller
         if($request->hasFile('image')){
             $formFields['image'] = $request->file('image')->store('buses','public');
         }
+        $formFields['company_id'] = Auth::guard('company')->user()->id;
+
 
         // $formFields['user_id'] = auth()->id();
         // $formFields['author'] = auth()->user()->name;
         Bus::create($formFields);
 
-        return redirect('/buses')->with('message', "Bus created successfully!");
+        return redirect('/company/buses')->with('message', "Bus created successfully!");
     }
 
     /**
@@ -126,7 +130,7 @@ class BusesController extends Controller
         }
         $bus->update($formFields);
 
-        return redirect('/buses')->with('message', "Bus updated successfully!");
+        return redirect('/company/buses')->with('message', "Bus updated successfully!");
     }
 
     /**

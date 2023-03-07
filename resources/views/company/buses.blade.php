@@ -265,9 +265,10 @@
                           </tr>
                         </thead>
                         <tbody>
-                            @if(count($buses) == 0)
-                                <p>No Posts found!</p>
+                            <tr><td><center>@if(count($buses) == 0)
+                                <p>No Buses found!</p>
                             @endif
+                            </center></td></tr>
                             @foreach ($buses as $bus)
                           <tr>
                             <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">

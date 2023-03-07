@@ -254,8 +254,8 @@
                   </div>
 
                   @if(count($routes) == 0)
-        <p>No Routes found!</p>
-    @endif
+                    <p>No Routes found!</p>
+                  @endif
     <div class="flex flex-wrap -m-4">
         <div class="container px-5 py-24 mx-auto">
             <div class="flex flex-wrap -mx-4 -my-8">

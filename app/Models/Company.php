@@ -4,11 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Bus;
+use App\Models\Route;
+use App\Models\Schedule;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class Company extends Authenticatable
 {
@@ -54,6 +57,18 @@ class Company extends Authenticatable
     public function isAdmin()
     {
         return false;
+    }
+
+    public function schedules(){
+        return $this->hasMany(Schedule::class, 'company_id');
+    }
+
+    public function routes(){
+        return $this->hasMany(Route::class, 'company_id');
+    }
+
+    public function buses(){
+        return $this->hasMany(Bus::class, 'company_id');
     }
 }
 
