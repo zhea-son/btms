@@ -33,7 +33,11 @@ use App\Http\Controllers\SchedulesController;
 Route::get('/', [PagesController::class, 'home'])->name('pages.home');
 Route::get('/about', [PagesController::class, 'about'])->name('pages.about');
 Route::get('/signup', [PagesController::class, 'sign_up'])->name('pages.sign_up');
-Route::get('/login', [CompanyController::class, 'show_login'])->name('pages.login');
+Route::get('/login', [PagesController::class, 'login'])->name('pages.login');
+Route::get('/user/register', [PagesController::class, 'user_signup'])->name('users.sign_up');
+Route::post('/user/new', [PagesController::class, 'new_user'])->name('users.new');
+Route::get('/user/login', [PagesController::class, 'user_login'])->name('users.login');
+Route::post('/user/authenticate', [PagesController::class, 'authenticate'])->name('users.authenticate');
 Route::get('/live', [SchedulesController::class, 'live'])->name('pages.live');
 
 
