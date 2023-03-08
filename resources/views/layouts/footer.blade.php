@@ -14,7 +14,7 @@
             <a href="/routes" class="mr-4 hover:underline md:mr-6">Routes</a>
         </li>
         <li>
-            <a href="{{ route('buses.create') }}" class="hover:underline">Buses</a>
+            <a href="/buses" class="hover:underline">Buses</a>
         </li>
     </ul>
 </footer>
