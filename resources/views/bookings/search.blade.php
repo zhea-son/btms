@@ -10,44 +10,17 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form method="POST" action="/show" enctype="multipart/form-data">
+                    <form method="POST" action="/search" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-4">
                             <label class="text-xl text-gray-600">From </label></br>
                             <select name="from">
                                 <option>--Select</option>
-                                <option value="Kathmandu">Kathmandu</option>
-                                <option value="Nawalpur">Nawalpur</option>
-                                <option value="Pokhara">Pokhara</option>
-                                <option value="Biratnagar">Biratnagar</option>
-                                <option value="Bharatpur">Bharatpur</option>
-                                <option value="Janakpur">Janakpur</option>
-                                <option value="Lalitpur">Lalitpur</option>
-                                <option value="Birgunj">Birgunj</option>
-                                <option value="Dharan">Dharan</option>
-                                <option value="Butwal">Butwal</option>
-                                <option value="Bhaktapur">Bhaktapur</option>
-                                <option value="Chitwan">Chitwan</option>
-                                <option value="Nepalgunj">Nepalgunj</option>
-                                <option value="Hetauda">Hetauda</option>
-                                <option value="Ilam">Ilam</option>
-                                <option value="Dhangadhi">Dhangadhi</option>
-                                <option value="Birtamod">Birtamod</option>
-                                <option value="Tikapur">Tikapur</option>
-                                <option value="Damak">Damak</option>
-                                <option value="Mahendranagar">Mahendranagar</option>
-                                <option value="Bhimdatta">Bhimdatta</option>
-                                <option value="Ghorahi">Ghorahi</option>
-                                <option value="Itahari">Itahari</option>
-                                <option value="Birendranagar">Birendranagar</option>
-                                <option value="Jhapa">Jhapa</option>
-                                <option value="Narayangadh">Narayangadh</option>
-                                <option value="Dhankuta">Dhankuta</option>
-                                <option value="Bhojpur">Bhojpur</option>
-                                <option value="Tansen">Tansen</option>
-                                <option value="Gulmi">Gulmi</option>
-                                <option value="Palpa">Palpa</option>
-                                <option value="Syangja">Syangja</option>
+                                @foreach ($from as $f)
+                                <option value="{{ $f }}">{{ $f }}</option>
+                                    
+                                @endforeach
+                                
                             </select>
                             @error('from')
                             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
@@ -58,37 +31,10 @@
                             <label class="text-xl text-gray-600">To </label></br>
                             <select name="to">
                                 <option>--Select</option>
-                                <option value="Kathmandu">Kathmandu</option>
-                                <option value="Pokhara">Pokhara</option>
-                                <option value="Biratnagar">Biratnagar</option>
-                                <option value="Bharatpur">Bharatpur</option>
-                                <option value="Janakpur">Janakpur</option>
-                                <option value="Lalitpur">Lalitpur</option>
-                                <option value="Birgunj">Birgunj</option>
-                                <option value="Dharan">Dharan</option>
-                                <option value="Butwal">Butwal</option>
-                                <option value="Bhaktapur">Bhaktapur</option>
-                                <option value="Chitwan">Chitwan</option>
-                                <option value="Nepalgunj">Nepalgunj</option>
-                                <option value="Hetauda">Hetauda</option>
-                                <option value="Ilam">Ilam</option>
-                                <option value="Dhangadhi">Dhangadhi</option>
-                                <option value="Birtamod">Birtamod</option>
-                                <option value="Tikapur">Tikapur</option>
-                                <option value="Damak">Damak</option>
-                                <option value="Mahendranagar">Mahendranagar</option>
-                                <option value="Bhimdatta">Bhimdatta</option>
-                                <option value="Ghorahi">Ghorahi</option>
-                                <option value="Itahari">Itahari</option>
-                                <option value="Birendranagar">Birendranagar</option>
-                                <option value="Jhapa">Jhapa</option>
-                                <option value="Narayangadh">Narayangadh</option>
-                                <option value="Dhankuta">Dhankuta</option>
-                                <option value="Bhojpur">Bhojpur</option>
-                                <option value="Tansen">Tansen</option>
-                                <option value="Gulmi">Gulmi</option>
-                                <option value="Palpa">Palpa</option>
-                                <option value="Syangja">Syangja</option>
+                                @foreach ($to as $t)
+                                <option value="{{ $t }}">{{ $t }}</option>
+                                    
+                                @endforeach
                             </select>
                             @error('to')
                             <p class="text-red-500 text-xs mt-1">{{$message}}</p>

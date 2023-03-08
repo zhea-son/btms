@@ -7,15 +7,17 @@ use App\Models\Route;
 use App\Models\Schedule;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class BookingsController extends Controller
 {
     public function show_search(){
-        
-        return view('bookings.search');
+        $from = Route::pluck('origin','origin');
+        $to = Route::pluck('destination','destination');
+        return view('bookings.search',compact('from','to'));
     }
 
-    public function show(Request $request){
+    public function search(Request $request){
         $formFields = $request->validate([
             'from' => 'required',
             'to' => 'required',
@@ -51,6 +53,7 @@ class BookingsController extends Controller
         ]);
 
         $formFields['schedule_id'] = $request['schedule_id'];
+        $formFields['user_id'] = auth()->user()->id;
         Booking::create($formFields);
 
         
@@ -62,7 +65,8 @@ class BookingsController extends Controller
     }
 
     public function my_bookings(){
-        $bookings = Booking::all();
+        $bookings = Booking::where('user_id',auth()->user()->id)->with(['schedule'])->get();
+        
         return view('bookings.my_bookings', compact('bookings'));
     }
 }

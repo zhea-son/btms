@@ -53,10 +53,10 @@
                     {{ $booking->schedule->date }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $booking->schedule->bus->seats }}
+                    {{ $booking->seats }}
                 </td>
                 <td class="px-6 py-4">
-                    1 day to go
+                    Days Remaining
                 </td>
             </tr>
             @endforeach
