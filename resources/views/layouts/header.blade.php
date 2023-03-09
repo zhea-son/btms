@@ -38,8 +38,8 @@
                             class="block py-2 pl-3 pr-4 {{ Route::currentRouteName() == 'pages.home' ? 'text-teal-500' : 'text-gray-700' }} rounded hover:bg-gray-100 md:hover:bg-transparent">Home</a>
                     </li>
                     <li>
-                        <a href="{{ route('pages.about') }}"
-                            class="block py-2 pl-3 pr-4 {{ Route::currentRouteName() == 'pages.about' ? 'text-teal-500' : 'text-gray-700' }} rounded hover:bg-gray-100 md:hover:bg-transparent">About us</a>
+                        <a href="{{ route('search_buses') }}"
+                            class="block py-2 pl-3 pr-4 {{ Route::currentRouteName() == 'search_buses' ? 'text-teal-500' : 'text-gray-700' }} rounded hover:bg-gray-100 md:hover:bg-transparent">Search</a>
                     </li>
                     <li>
                         <a href="{{ route('my_bookings') }}"
