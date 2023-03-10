@@ -7,6 +7,7 @@ use App\Models\Route;
 use App\Models\Company;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -99,7 +100,7 @@ class CompanyController extends Controller
 
     public function my_schedules(){
         $company = Auth::guard('company')->user();
-        $schedules =  Schedule::with(['bus','route'])->where('company_id',$company->id)->get();
+        $schedules =  Schedule::with(['bus','route'])->where('company_id',$company->id)->where('completed',FALSE)->get();
 
         foreach($schedules as $schedule){
             $totalSeats = $schedule->bus->seats;
@@ -111,6 +112,20 @@ class CompanyController extends Controller
         }
         
         return view('company.schedules', [
+            'company' => $company,
+    ], compact('schedules'));
+    }
+
+    public function my_trips(){
+        $company = Auth::guard('company')->user();
+        $schedules =  Schedule::with(['bus','route'])->where('company_id',$company->id)->where('completed',TRUE)->get();
+        
+        foreach($schedules as $schedule){
+            $schedule->arrtime = Carbon::createFromFormat('Y-m-d H:i:s', $schedule->completed_at)->format('H:i:s');
+            $schedule->arrdate = Carbon::createFromFormat('Y-m-d H:i:s', $schedule->completed_at)->format('Y-m-d');
+        
+        }
+        return view('company.trips', [
             'company' => $company,
     ], compact('schedules'));
     }

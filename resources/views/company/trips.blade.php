@@ -1,6 +1,6 @@
 @extends('company.master')
 
-@section('title','My Routes')
+@section('title','Trips Completed')
 
 @section('content')
 
@@ -30,7 +30,7 @@
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Dashboard</span>
             </a>
           </li>
-          
+
           <li class="mt-0.5 w-full">
             <a class="py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80" href="/company/buses">
               <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
@@ -39,11 +39,11 @@
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Buses</span>
             </a>
           </li>
-          
+
           <li class="mt-0.5 w-full">
-            <a class="py-2.7 bg-blue-500/13 dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors " href="/company/routes">
+            <a class="py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80" href="/company/routes">
               <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
+                <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-app"></i>
               </div>
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Routes</span>
             </a>
@@ -52,20 +52,21 @@
           <li class="mt-0.5 w-full">
             <a class="py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80" href="/company/schedules">
               <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-app"></i>
+                <i class="relative top-0 text-sm leading-normal text-red-600 ni ni-world-2"></i>
               </div>
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Schedules</span>
             </a>
           </li>
 
           <li class="mt-0.5 w-full">
-            <a class="py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors dark:text-white dark:opacity-80" href="/company/trips">
+            <a class="py-2.7 bg-blue-500/13 dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors " href="/company/trips">
               <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                <i class="relative top-0 text-sm leading-normal text-red-600 ni ni-world-2"></i>
+                <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
               </div>
               <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Trips</span>
             </a>
           </li>
+
 
           <li class="w-full mt-4">
             <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Account pages</h6>
@@ -120,9 +121,9 @@
                 <li class="text-sm leading-normal">
                   <a class="text-white opacity-50" href="javascript:;">Company</a>
                 </li>
-                <li class="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:text-white before:content-['/']" aria-current="page">Routes</li>
+                <li class="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:text-white before:content-['/']" aria-current="page">Trips</li>
               </ol>
-              <h6 class="mb-0 font-bold text-white capitalize">My Routes</h6>
+              <h6 class="mb-0 font-bold text-white capitalize">My Trips</h6>
             </nav>
   
             <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
@@ -242,86 +243,181 @@
   
         <!-- end Navbar -->
 
-        <div class="w-full px-6 py-6 mx-auto">
+        {{-- <div class="w-full px-6 py-6 mx-auto">
             <!-- table 1 -->
     
             <div class="flex flex-wrap -mx-3">
               <div class="flex-none w-full max-w-full px-3">
                 <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border flex justify-end">
                   <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                    <h6 class="dark:text-white">Routes table</h6>
-                    <a class="flex text-red bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"  href="{{ route('routes.create') }}"><p>Add Route</p></a>
+                    <h6 class="dark:text-white">Schedules table</h6>
+                    <a class="flex text-red bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"  href="/schedules/create"><p>Add Schedule</p></a>
                   </div>
+                    @if(count($schedules) == 0)
+                        <p>No Schedules found!</p>
+                    @endif
 
-                  @if(count($routes) == 0)
-                    <p>No Routes found!</p>
-                  @endif
+                  
     <div class="flex flex-wrap -m-4">
         <div class="container px-5 py-24 mx-auto">
             <div class="flex flex-wrap -mx-4 -my-8">
-                @foreach ($routes as $route)
-              <div class="py-8 px-4 lg:w-1/3 border border-teal-500">
-                <div class="h-full flex items-start">
+                @foreach ($schedules as $schedule)
+                    <div class="py-8 px-4 lg:w-1/3 border border-teal-500">
+                    <div class="h-full flex items-start">
                   
-                  <div class="flex-grow pl-6">
-                    <h2 class="tracking-widest text-xs title-font font-medium text-indigo-500 mb-1">{{$route->distance}} km</h2>
-                    <h1 class="title-font text-xl font-medium text-gray-900 mb-3">{{$route->name}}</h1>
-                    <p class="leading-relaxed mb-5">Estimated Time: {{$route->estimated_time}} hrs.</p>
-                    
+                    <div class="flex-grow pl-6">
+                    <h2 class="tracking-widest text-xs title-font font-medium text-indigo-500 mb-1">{{$schedule->date}}</h2>
+                    <h1 class="title-font text-xl font-medium text-gray-900 mb-3">{{$schedule->route->name}}</h1>
+                    <h1 class="title-font text-xl font-medium text-gray-900 mb-3">{{$schedule->bus->number_plate}} </h1>
+                    <p class="leading-relaxed mb-5">{{$schedule->departure_time}}</p>
+                    <p class="leading-relaxed mb-5">Rs. {{$schedule->fare}}</p>
                     <ul class="flex">
-                        <li
+                      <li
+                      class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
+                      >
+                        <a href="/schedules/?type={{$schedule->bus->type}}">{{$schedule->bus->type}}</a>
+                      </li>
+                      <li
                             class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
                         >
-                            <a href="/routes/?origin={{$route->origin}}">{{$route->origin}}</a>
+                            <a href="/schedules/?place={{$schedule->route->origin}}">{{$schedule->route->origin}}</a>
                         </li>
                         <li
                         class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
                         >
-                        <a href="/routes/?destination={{$route->destination}}">{{$route->destination}}</a>
+                        <a href="/schedules/?place={{$schedule->route->destination}}">{{$schedule->route->destination}}</a>
                     </li>
                     <li
                         class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
                         >
-                        <a href="/routes/?via={{$route->via}}">{{$route->via}}</a>
+                        <a href="/schedules/?place={{$schedule->route->via}}">{{$schedule->route->via}}</a>
                     </li>
-                    {{-- <li
-                        class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                        >
-                        <a href="/buses/?type={{$route->type}}">{{$route->type}}</a>
-                    </li> --}}
                     </ul>
                     <ul class="flex">
-                        <li
-                        class="text-teal-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
-                    >
-                        <a href="/schedules/{{$route->id}}/create">Add to Schedule</a>
-                    </li>
-                    <li
-                        class="text-blue-500 inline-flex items-center px-2 md:mb-2 lg:mb-0"
-                    >
-                        <a href="/routes/{{$route->id}}/edit">Edit</a>
-                    </li>
-                    <li
-                        class="text-red-500 inline-flex items-center px-2 md:mb-2 lg:mb-0"
-                    >
-                    <form method="POST" action="/routes/{{$route->id}}">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Delete</button>        
-                      </form>
-                    </li>
-                    </ul>
+                      <li
+                          class="text-indigo-500 inline-flex items-center px-2 md:mb-2 lg:mb-0"
+                      >
+                          <a href="#">Buy Ticket!</a>
+                      </li>
+                      <li
+                          class="text-yellow-500 inline-flex items-center px-2 md:mb-2 lg:mb-0"
+                      >
+                          <a href="#">Set Return Trip!</a>
+                      </li>
+                      <li
+                          class="text-blue-500 inline-flex items-center px-2 md:mb-2 lg:mb-0"
+                      >
+                          <a href="/schedules/{{$schedule->id}}/edit">Edit</a>
+                      </li>
+                      <li
+                          class="text-red-500 inline-flex items-center px-center md:mb-2 lg:mb-0"
+                      >
+                      <form method="POST" action="/schedules/{{$schedule->id}}">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit">Delete</button>        
+                        </form>
+                      </li>
+                      </ul>
                   </div>
                 </div>
               </div>
 
               @endforeach
             </div>
-        </div>
+                </div>
             </div>
               </div>
             </div>
         </div>
+
+        </div> --}}
+
+        <div class="w-full px-6 py-6 mx-auto">
+          <!-- table 1 -->
+  
+          <div class="flex flex-wrap -mx-3">
+            <div class="flex-none w-full max-w-full px-3">
+              <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border flex justify-end">
+                <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+                  <h6 class="dark:text-white">Trips table</h6>
+                </div>
+
+                <div class="flex-auto px-0 pt-0 pb-2">
+                  <div class="p-0 overflow-x-auto">
+                    <table class="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
+                      <thead class="align-bottom">
+                        <tr>
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Date</th>
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Departure Time</th>
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Route</th>
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Bus Number</th>
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Type</th>
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Arrival Date</th> 
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Arrival Time</th> 
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">No. of Passengers</th>
+                          <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Total Income</td>
+                                                  </tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>
+                          
+                          @if(count($schedules) == 0)
+                              <p>No Trips Completed</p>
+                          @endif
+                        </td></tr>
+                          @foreach ($schedules as $schedule)
+                        <tr>
+                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <span class="">{{ $schedule->date }}</span>
+                          </td>
+                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <span class="">{{ $schedule->departure_time }}</span>
+                          </td>
+                          <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <div class="flex px-2 py-1">
+                              <div class="flex flex-col justify-center">
+                                <h6 class="mb-0 text-sm leading-normal dark:text-white">{{ $schedule->route->name }}</h6>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <span class="">{{ $schedule->bus->number_plate }}</span>
+                          </td>
+                          <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <li class="bg-gradient-to-tl from-emerald-500 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white"><a href="/buses/?type={{$schedule->bus->type}}">{{$schedule->bus->type}}</a></li>
+                          </td>
+                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <span class="">{{ $schedule->arrdate }}</span>
+                          </td>
+                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <span class="">{{ $schedule->arrtime }}</span>
+                          </td>
+                          {{-- <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <li class="bg-gradient-to-tl from-emerald-500 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white"><a href="/buses/?type={{$schedule->route->origin}}">{{$schedule->route->origin}}</a></li>
+                            <li class="bg-gradient-to-tl from-emerald-500 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white"><a href="/buses/?type={{$schedule->route->destination}}">{{$schedule->route->destination}}</a></li>
+                            <li class="bg-gradient-to-tl from-emerald-500 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white"><a href="/buses/?type={{$schedule->route->via}}">{{$schedule->route->via}}</a></li>
+                          </td> --}}
+                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <span class="">{{ $schedule->no_of_passengers }}</span>
+                          </td>
+                          <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                            <span class="">{{ $schedule->income }}</span>
+                          </td>
+                        
+                        </tr>
+                        
+                        @endforeach
+                        
+                      </tbody>
+                  </table>
+                  </div>
+              </div>
+          </div>
+            </div>
+          </div>
+      </div>
+
     </main>
 </body>
 

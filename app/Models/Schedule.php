@@ -12,6 +12,8 @@ class Schedule extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     public function scopeFilter($query, array $filters){
         if ($filters['place'] ?? false) {
             $query->whereHas('route', function ($query) {

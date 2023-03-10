@@ -51,6 +51,7 @@ Route::resource('buses', BusesController::class);
 Route::resource('routes', RoutesController::class);
 
 Route::resource('schedules', SchedulesController::class);
+Route::put('/schedules/{id}/complete', [SchedulesController::class , 'completed'])->name('schedules.complete');
 
 
 // Bookings Routes
@@ -79,6 +80,8 @@ Route::get('/company/buses', [CompanyController::class, 'my_buses'])->name('comp
 Route::get('/company/routes', [CompanyController::class, 'my_routes'])->name('company.routes');
 
 Route::get('/company/schedules', [CompanyController::class, 'my_schedules'])->name('company.schedules');
+
+Route::get('/company/trips', [CompanyController::class, 'my_trips'])->name('company.trips');
 
 
 

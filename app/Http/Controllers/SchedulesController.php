@@ -145,5 +145,18 @@ class SchedulesController extends Controller
         return view('schedules.live', compact('schedules'));
     }
 
+    public function completed($id)
+{
+    $schedule = Schedule::findOrFail($id);
+    $schedule->completed = true;
+    $schedule->completed_at = now(); // Update completed_at to the current timestamp
+    $bookedSeats = $schedule->bookings->sum('seats');
+    $schedule->no_of_passengers = $bookedSeats; // Update no_of_passengers to bookedSeats
+    $schedule->income = $bookedSeats * $schedule->fare; // Update income
+    $schedule->save();
+
+    return redirect()->route('company.schedules');
+}
+
 
 }

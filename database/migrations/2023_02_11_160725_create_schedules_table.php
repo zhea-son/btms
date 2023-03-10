@@ -21,7 +21,10 @@ return new class extends Migration
             $table->date('date')->format('Y-m-d');
             $table->time('departure_time');
             $table->string('fare');
-            $table->timestamps();
+            $table->string('no_of_passengers')->nullable();
+            $table->string('income')->nullable();
+            $table->boolean('completed')->default(FALSE);
+            $table->timestamp('completed_at')->nullable();
         });
     }
 
