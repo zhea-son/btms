@@ -5,6 +5,8 @@
 @section('content')
     
 <h1 class="text-center text-4xl text-bold text-teal-500">Book a Ticket</h1>
+<p class="text-center">- {{ $route }}</p>
+<p class="text-center">- {{ $date }}</p>
 
 @if (count($schedules) == 0)
             <p>No Buses found on your mentioned date</p>
@@ -21,7 +23,7 @@
                     Bus Type
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Route
+                    Company
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Departure Time
@@ -46,7 +48,7 @@
                     {{ $schedule->bus->type }}
                 </th>
                 <td class="px-6 py-4">
-                    {{ $schedule->route->name }}
+                    {{ $schedule->company->company_name }}
                 </td>
                 <td class="px-6 py-4">
                     {{ $schedule->departure_time }}
@@ -55,12 +57,13 @@
                     {{ $schedule->fare }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $schedule->bus->seats }}
+                    {{ $schedule->availableSeats }}
                 </td>
                 <td class="px-6 py-4">
                     <form action="/booking" method="POST">
                         @csrf
                         <input type="hidden" name="schedule_id" value="{{ $schedule->id }}">
+                        <input type="hidden" name="available_seats" value="{{ $schedule->availableSeats }}">
                         <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Book Ticket</button>
                     </form>
                 </td>

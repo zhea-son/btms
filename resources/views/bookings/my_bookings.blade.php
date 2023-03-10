@@ -19,19 +19,25 @@
                     Bus Type
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Date
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Route
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Departure Time
+                    Company
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Date
+                    Departure Time
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Seats
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Status
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
                 </th>
             </tr>
         </thead>
@@ -44,19 +50,40 @@
                     {{ $booking->schedule->bus->type }}
                 </th>
                 <td class="px-6 py-4">
+                    {{ $booking->schedule->date }}
+                </td>
+                <td class="px-6 py-4">
                     {{ $booking->schedule->route->name }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $booking->schedule->departure_time }}
+                    {{ $booking->schedule->company->company_name }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $booking->schedule->date }}
+                    {{ $booking->schedule->departure_time }}
                 </td>
                 <td class="px-6 py-4">
                     {{ $booking->seats }}
                 </td>
                 <td class="px-6 py-4">
                     Days Remaining
+                </td>
+                <td class="px-6 py-4">
+                    <ul>
+                        <li
+                                    class="text-red-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
+                                >
+                                <form method="POST" action="/bookings/{{$booking->id}}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button>Cancel</button>        
+                                  </form>
+                        </li>
+                        <li
+                                    class="text-emerald-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
+                                >
+                                    <a href="#">Pay and Confirm</a>
+                        </li>
+                    </ul>
                 </td>
             </tr>
             @endforeach

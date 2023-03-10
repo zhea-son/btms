@@ -33,7 +33,19 @@ class BookingsController extends Controller
                   ->where('destination', $to);
         })->whereDate('date', $date)->get();
 
-        return view('bookings.show', compact('schedules'));
+        $route = "From " . $from . " to " . $to;
+
+        foreach ($schedules as $schedule) {
+            $totalSeats = $schedule->bus->seats;
+            $bookedSeats = $schedule->bookings->sum('seats');
+            if($bookedSeats == $totalSeats){ $schedule->availableSeats = "No Seats Available"; }
+            else{
+            $availableSeats = $totalSeats - $bookedSeats;
+            $schedule->availableSeats = $availableSeats; }
+        }
+
+
+        return view('bookings.show', compact('schedules','route','date'));
 
     }
     
@@ -44,7 +56,10 @@ class BookingsController extends Controller
 
     public function booking(Request $request){
         $schedule = $request['schedule_id'];
-        return view('bookings.booking', ['schedule_id' => $request->input('schedule_id')]);
+        $availableSeats = $request['available_seats'];
+        return view('bookings.booking', ['schedule_id' => $request->input('schedule_id'),
+                                            'available_seats' => $availableSeats
+    ]);
     }
 
     public function store(Request $request){
@@ -53,11 +68,16 @@ class BookingsController extends Controller
         ]);
 
         $formFields['schedule_id'] = $request['schedule_id'];
+        $available_seats = $request['available_seats'];
         $formFields['user_id'] = auth()->user()->id;
-        Booking::create($formFields);
 
-        
-        return redirect('/my_bookings')->with('message', "Booking done successfully!");
+        if($formFields['seats'] <= $available_seats){
+            Booking::create($formFields);
+            return redirect('/my_bookings')->with('message', "Booking done successfully!");
+        }
+        else{
+            return response()->json(['message' => 'entered seats not available'], 400);
+        }
     }
 
     public function booking_details(){
@@ -68,5 +88,11 @@ class BookingsController extends Controller
         $bookings = Booking::where('user_id',auth()->user()->id)->with(['schedule'])->get();
         
         return view('bookings.my_bookings', compact('bookings'));
+    }
+
+    public function destroy(Booking $booking)
+    {
+        $booking->delete();
+        return back()->with('message', 'Booking deleted successfully!');
     }
 }

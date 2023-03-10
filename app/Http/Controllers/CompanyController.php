@@ -101,6 +101,14 @@ class CompanyController extends Controller
         $company = Auth::guard('company')->user();
         $schedules =  Schedule::with(['bus','route'])->where('company_id',$company->id)->get();
 
+        foreach($schedules as $schedule){
+            $totalSeats = $schedule->bus->seats;
+            $bookedSeats = $schedule->bookings->sum('seats');
+            if($bookedSeats == $totalSeats){ $schedule->availableSeats = "No Seats Available"; }
+            else{
+            $schedule->availableSeats = $totalSeats - $bookedSeats;
+            }
+        }
         
         return view('company.schedules', [
             'company' => $company,

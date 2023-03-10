@@ -20,6 +20,7 @@
                             @enderror
                         </div>
                         <input type="hidden" name="schedule_id" value="{{ $schedule_id }}">
+                        <input type="hidden" name="available_seats" value="{{ $available_seats }}">
                         <div class="flex p-1">
                             
                             <button role="submit" class="p-3 bg-blue-500 text-white hover:bg-blue-400" required>Book</button>

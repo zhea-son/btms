@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bus;
 use App\Models\User;
+use App\Models\Route;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class PagesController extends Controller
 {
     public function home(){
-        return view('pages.home');
+        $buses = Bus::count();
+        $users = User::count();
+        $trips = 0;
+        $places = Route::count(['origin']);
+        return view('pages.home', compact(['buses','users','places','trips']));
     }
 
     public function about(){
