@@ -155,7 +155,7 @@ class SchedulesController extends Controller
     $schedule->income = $bookedSeats * $schedule->fare; // Update income
     $schedule->save();
 
-    return redirect()->route('company.schedules');
+    return redirect()->route('company.trips');
 }
 
 

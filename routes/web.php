@@ -58,9 +58,10 @@ Route::put('/schedules/{id}/complete', [SchedulesController::class , 'completed'
 Route::get('/search_buses', [BookingsController::class, 'show_search'])->name('search_buses');
 Route::post('/search', [BookingsController::class, 'search']);
 Route::post('/booking', [BookingsController::class, 'booking'])->middleware('auth');
-Route::post('/bookings', [BookingsController::class, 'store'])->middleware('auth');
-Route::delete('/bookings/{booking}', [BookingsController::class, 'destroy'])->middleware('auth');
-Route::get('/my_bookings', [BookingsController::class, 'my_bookings'])->name('my_bookings')->middleware('auth');
+Route::post('/user/bookings', [BookingsController::class, 'store'])->middleware('auth');
+Route::delete('/user/bookings/{booking}', [BookingsController::class, 'destroy'])->middleware('auth');
+Route::get('/user/my_bookings', [BookingsController::class, 'my_bookings'])->name('my_bookings')->middleware('auth');
+Route::get('/user/my_history', [BookingsController::class, 'my_history'])->name('my_history')->middleware('auth');
 
 /* Company Routes */
 Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name('company.dashboard')->middleware('company');

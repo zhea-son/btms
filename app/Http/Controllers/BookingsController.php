@@ -85,9 +85,33 @@ class BookingsController extends Controller
     }
 
     public function my_bookings(){
-        $bookings = Booking::where('user_id',auth()->user()->id)->with(['schedule'])->get();
+        $bookings = Booking::where('user_id',auth()->user()->id)->whereHas('schedule', function ($query){
+            $query->where('completed', false);
+        })->with(['schedule'])->get();
+
+        foreach($bookings as $booking){
+            $today = Carbon::today();
+            $daysRemaining = $today->diffInDays($booking->schedule->date, false);
+            $booking->status = $daysRemaining . " Days Remaining";
+        }
+
+        // dd($booking->status);
         
         return view('bookings.my_bookings', compact('bookings'));
+    }
+
+    public function my_history(){
+        $bookings = Booking::where('user_id',auth()->user()->id)->whereHas('schedule', function ($query){
+            $query->where('completed', true);
+        })->with(['schedule'])->get();
+
+        foreach($bookings as $booking){
+            $booking->arrtime = Carbon::createFromFormat('Y-m-d H:i:s', $booking->schedule->completed_at)->format('H:i:s');
+            $booking->arrdate = Carbon::createFromFormat('Y-m-d H:i:s', $booking->schedule->completed_at)->format('Y-m-d');
+            $booking->paid = $booking->seats * $booking->schedule->fare;
+        }
+        
+        return view('bookings.my_history', compact('bookings'));
     }
 
     public function destroy(Booking $booking)

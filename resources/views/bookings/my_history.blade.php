@@ -1,13 +1,13 @@
 @extends('layouts.layout')
 
-@section('title','My Bookings')
+@section('title','My Bookings History')
 
 @section('content')
     
-<h1 class="text-center text-4xl text-bold text-teal-500">My Bookings</h1><!-- component -->
+<h1 class="text-center text-4xl text-bold text-teal-500">My History</h1><!-- component -->
 
 @if ( count($bookings) == 0)
-            <p>No Bookings yet!</p>
+            <p>You have got no History of Bookings yet!</p>
 
 @else
 
@@ -19,22 +19,25 @@
                     Bus Type
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Date
-                </th>
-                <th scope="col" class="px-6 py-3">
                     Route
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Company
+                    Departure Date
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Departure Time
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Arrival Date
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Arrival Time
+                </th>
+                <th scope="col" class="px-6 py-3">
                     Seats
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Status
+                    Amount Paid
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Action
@@ -50,38 +53,36 @@
                     {{ $booking->schedule->bus->type }}
                 </th>
                 <td class="px-6 py-4">
-                    {{ $booking->schedule->date }}
-                </td>
-                <td class="px-6 py-4">
                     {{ $booking->schedule->route->name }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $booking->schedule->company->company_name }}
+                    {{ $booking->schedule->date }}
                 </td>
                 <td class="px-6 py-4">
                     {{ $booking->schedule->departure_time }}
                 </td>
                 <td class="px-6 py-4">
+                    {{ $booking->arrdate }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $booking->arrtime }}
+                </td>
+                <td class="px-6 py-4">
                     {{ $booking->seats }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $booking->status }}
+                    {{ $booking->paid }}
                 </td>
                 <td class="px-6 py-4">
                     <ul>
                         <li
-                                    class="text-red-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
+                                    class="text-blue-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
                                 >
                                 <form method="POST" action="/bookings/{{$booking->id}}">
                                     @csrf
-                                    @method('DELETE')
-                                    <button>Cancel</button>        
+                                    @method('PUT')
+                                    <button>View</button>        
                                   </form>
-                        </li>
-                        <li
-                                    class="text-emerald-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
-                                >
-                                    <a href="#">Pay and Confirm</a>
                         </li>
                     </ul>
                 </td>
@@ -91,7 +92,6 @@
     </table>
 </div>
 @endif
-<a href="/user/my_history" class="py-12 text-xl text-teal-500 underline">See my History</a>
 
 
 @endsection
