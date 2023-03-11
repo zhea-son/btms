@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('schedule_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('seats');
+            $table->string('amount');
+            $table->boolean('paid')->default(false);
             // $table->string('contact');
             // $table->string('passenger_contact');
             // $table->string('passenger_age');

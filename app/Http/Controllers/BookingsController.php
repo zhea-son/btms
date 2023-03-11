@@ -56,8 +56,10 @@ class BookingsController extends Controller
 
     public function booking(Request $request){
         $schedule = $request['schedule_id'];
+        $fare = $request['fare'];
         $availableSeats = $request['available_seats'];
         return view('bookings.booking', ['schedule_id' => $request->input('schedule_id'),
+                                        'fare' => $request->input('fare'),
                                             'available_seats' => $availableSeats
     ]);
     }
@@ -67,13 +69,16 @@ class BookingsController extends Controller
             'seats' => 'required'
         ]);
 
+
+        $fare = $request['fare'];
         $formFields['schedule_id'] = $request['schedule_id'];
         $available_seats = $request['available_seats'];
         $formFields['user_id'] = auth()->user()->id;
 
         if($formFields['seats'] <= $available_seats){
+            $formFields['amount'] = $formFields['seats'] * $fare; 
             Booking::create($formFields);
-            return redirect('/my_bookings')->with('message', "Booking done successfully!");
+            return redirect('/user/my_bookings')->with('message', "Booking done successfully!");
         }
         else{
             return response()->json(['message' => 'entered seats not available'], 400);
@@ -108,7 +113,6 @@ class BookingsController extends Controller
         foreach($bookings as $booking){
             $booking->arrtime = Carbon::createFromFormat('Y-m-d H:i:s', $booking->schedule->completed_at)->format('H:i:s');
             $booking->arrdate = Carbon::createFromFormat('Y-m-d H:i:s', $booking->schedule->completed_at)->format('Y-m-d');
-            $booking->paid = $booking->seats * $booking->schedule->fare;
         }
         
         return view('bookings.my_history', compact('bookings'));

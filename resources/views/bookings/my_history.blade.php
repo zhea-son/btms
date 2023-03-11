@@ -71,7 +71,7 @@
                     {{ $booking->seats }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $booking->paid }}
+                    {{ $booking->amount }}
                 </td>
                 <td class="px-6 py-4">
                     <ul>

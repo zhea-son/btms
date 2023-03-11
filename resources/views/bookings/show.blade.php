@@ -63,6 +63,7 @@
                     <form action="/booking" method="POST">
                         @csrf
                         <input type="hidden" name="schedule_id" value="{{ $schedule->id }}">
+                        <input type="hidden" name="fare" value="{{ $schedule->fare }}">
                         <input type="hidden" name="available_seats" value="{{ $schedule->availableSeats }}">
                         <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Book Ticket</button>
                     </form>

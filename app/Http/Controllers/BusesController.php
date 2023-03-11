@@ -21,7 +21,7 @@ class BusesController extends Controller
         // return view('buses.index', compact('buses'));
         return view('buses.index', [
             // 'buses' => Bus::latest()->filter(request(['to','from','type']))->Simplepaginate(6)
-            'schedules' => Schedule::latest()->filter(request(['place','type']))->Simplepaginate(9)
+            'schedules' => Schedule::filter(request(['place','type']))->Simplepaginate(9)
         ]);
     }
 
