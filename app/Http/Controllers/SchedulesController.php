@@ -155,6 +155,12 @@ class SchedulesController extends Controller
     $schedule->income = $bookedSeats * $schedule->fare; // Update income
     $schedule->save();
 
+    $bookings = $schedule->bookings->where('paid', false);
+    foreach($bookings as $booking){
+        $booking->paid = true;
+        $booking->save();
+    }
+
     return redirect()->route('company.trips');
 }
 

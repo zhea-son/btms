@@ -123,4 +123,12 @@ class BookingsController extends Controller
         $booking->delete();
         return back()->with('message', 'Booking deleted successfully!');
     }
+
+    public function pay_on_bus(Request $request){
+        $booking = Booking::findOrFail($request['booking_id']);
+        $booking->payment_unique_id = "Hand Cash";
+        $booking->save();
+
+        return back();
+    }
 }

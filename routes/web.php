@@ -8,6 +8,7 @@ use App\Http\Controllers\RoutesController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\SchedulesController;
+use App\Http\Controllers\EsewaController;
 
 
 /*
@@ -58,10 +59,18 @@ Route::put('/schedules/{id}/complete', [SchedulesController::class , 'completed'
 Route::get('/search_buses', [BookingsController::class, 'show_search'])->name('search_buses');
 Route::post('/search', [BookingsController::class, 'search']);
 Route::post('/booking', [BookingsController::class, 'booking'])->middleware('auth');
+Route::post('/hand-cash', [BookingsController::class, 'pay_on_bus'])->middleware('auth');
+Route::post('/booking/{id}/details', [BookingsController::class, 'booking_details'])->middleware('auth');
 Route::post('/user/bookings', [BookingsController::class, 'store'])->middleware('auth');
 Route::delete('/user/bookings/{booking}', [BookingsController::class, 'destroy'])->middleware('auth');
 Route::get('/user/my_bookings', [BookingsController::class, 'my_bookings'])->name('my_bookings')->middleware('auth');
 Route::get('/user/my_history', [BookingsController::class, 'my_history'])->name('my_history')->middleware('auth');
+
+
+/* Payment Routes */
+Route::post('/payment', [EsewaController::class, 'esewa_pay']);
+Route::get('/payment/success', [EsewaController::class, 'esewa_pay_success']);
+Route::get('/payment/failure', [EsewaController::class, 'esewa_pay_failure']);
 
 /* Company Routes */
 Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name('company.dashboard')->middleware('company');

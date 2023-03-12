@@ -69,28 +69,84 @@
                 </td>
                 <td class="px-6 py-4">
                     {{ $booking->amount }}
+                    @if ($booking->paid == true)
+                    <li class="bg-gradient-to-tl from-emerald-500 to-teal-400 text-xs inline-flex text-center font-bold uppercase leading-none text-white">PAID</li>
+                        
+                    @elseif ($booking->payment_unique_id == "Hand Cash")
+                    <li class="bg-gradient-to-tl from-emerald-500 to-teal-400 text-xs inline-flex text-center font-bold uppercase leading-none text-white">HAND CASH</li>
+
+                    @endif
+
                 </td>
                 <td class="px-6 py-4">
                     {{ $booking->status }}
                 </td>
                 <td class="px-6 py-4">
                     <ul>
-                        <li
-                                    class="text-red-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
-                                >
-                                <form method="POST" action="/bookings/{{$booking->id}}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button>Cancel</button>        
-                                  </form>
-                        </li>
-                        <li
-                                    class="text-emerald-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
-                                >
-                                    <a href="#">Pay and Confirm</a>
-                        </li>
-                    </ul>
-                </td>
+                    @if ($booking->paid == true)
+
+                    <li class="text-blue-500 px-2 inline-flex items-center md:mb-2 lg:mb-0">
+                        <form action="/booking/{{ $booking->id }}/details" method="post">
+                            @csrf
+                            <input type="hidden" name="booking_id" value="{{ $booking->id }}">
+                            <button type="submit">View</button>
+                        </form>
+                    </li>
+
+                    @elseif ($booking->payment_unique_id == "Hand Cash")
+                        
+                    <li
+                    class="text-red-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
+                    >
+                    <form method="POST" action="/user/bookings/{{$booking->id}}">
+                        @csrf
+                        @method('DELETE')
+                        <button>Cancel</button>        
+                    </form>
+                </li>
+                <li
+                class="text-emerald-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
+                >
+                <form action="/payment" method="post">
+                    @csrf
+                    <input type="hidden" name="booking_id" value="{{ $booking->id }}">
+                    <button type="submit">Pay via Esewa</button>
+                </form>
+            </li>
+            
+                
+            @else
+            <li
+                    class="text-red-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
+                    >
+                    <form method="POST" action="/user/bookings/{{$booking->id}}">
+                        @csrf
+                        @method('DELETE')
+                        <button>Cancel</button>        
+                    </form>
+                </li>
+                <li
+                class="text-emerald-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
+                >
+                <form action="/payment" method="post">
+                    @csrf
+                    <input type="hidden" name="booking_id" value="{{ $booking->id }}">
+                    <button type="submit">Pay via Esewa</button>
+                </form>
+            </li>
+            <li
+                class="text-yellow-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
+                >
+                <form action="/hand-cash" method="post">
+                    @csrf
+                    <input type="hidden" name="booking_id" value="{{ $booking->id }}">
+                    <button type="submit">Pay on Bus</button>
+                </form>
+            </li>    
+                        
+            @endif
+        </ul>
+    </td>
             </tr>
             @endforeach
         </tbody>
