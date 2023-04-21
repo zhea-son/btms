@@ -33,11 +33,11 @@ class PagesController extends Controller
     }
 
     public function live(){
-        $today = 
+         $pageTitle = "Today's Buses";
         $live_buses = Schedule::whereDate('date', Carbon::now()->format('Y-m-d'))->where('completed',false);
         return view('buses.index', [
-            'schedules' => $live_buses->filter(request(['place','type']))->Simplepaginate(9)
+            'schedules' => $live_buses->filter(request(['place','type']))->Simplepaginate(9),
+            'pageTitle' => $pageTitle 
         ]);
     }
-
 }

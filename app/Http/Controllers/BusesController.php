@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Bus;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
@@ -16,11 +17,13 @@ class BusesController extends Controller
      */
     public function index()
     {
-        // $buses = Bus::filterByDestination($request->to)->get();
-        $buses = Schedule::where('completed', false);
-        // return view('buses.index', compact('buses'));
+        $pageTitle = "Most Popular Buses";
+        $today = Carbon::today();
+        $schedules = Schedule::where('completed', false)->whereBetween('date', [$today, $today->copy()->addWeek()]);
+        
         return view('buses.index', [
-            'schedules' => $buses->filter(request(['place','type']))->Simplepaginate(9)
+            'schedules' => $schedules->filter(request(['place','type']))->Simplepaginate(9), 
+            'pageTitle' =>  $pageTitle
         ]);
     }
 

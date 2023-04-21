@@ -53,6 +53,7 @@ class RoutesController extends Controller
         $formFields['name']= "From ". $formFields['origin']." To ".$formFields['destination']." via. ". $formFields['via'];
         $formFields['company_id'] = Auth::guard('company')->user()->id;
         
+        $via = explode(',', $formFields['via']);
         
         Route::create($formFields);
 

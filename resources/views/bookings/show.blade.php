@@ -60,6 +60,7 @@
                     {{ $schedule->availableSeats }}
                 </td>
                 <td class="px-6 py-4">
+                    @if($schedule->availableSeats != "No Seats Available")
                     <form action="/booking" method="POST">
                         @csrf
                         <input type="hidden" name="schedule_id" value="{{ $schedule->id }}">
@@ -67,6 +68,9 @@
                         <input type="hidden" name="available_seats" value="{{ $schedule->availableSeats }}">
                         <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Book Ticket</button>
                     </form>
+                    @else
+                    No Action
+                    @endif
                 </td>
             </tr>
             @endforeach

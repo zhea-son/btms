@@ -8,10 +8,10 @@
             <a href="{{ route('pages.about') }}" class="mr-4 hover:underline md:mr-6 ">About</a>
         </li>
         <li>
-            <a href="/schedules" class="mr-4 hover:underline md:mr-6">Schedules</a>
+            <a href="/company/login" class="mr-4 hover:underline md:mr-6">Company</a>
         </li>
         <li>
-            <a href="/routes" class="mr-4 hover:underline md:mr-6">Routes</a>
+            <a href="/user/login" class="mr-4 hover:underline md:mr-6">User</a>
         </li>
         <li>
             <a href="/buses" class="hover:underline">Buses</a>

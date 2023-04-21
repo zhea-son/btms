@@ -4,11 +4,14 @@
 
 @section('content')  
 
-<div class="container px-5 py-24 mx-auto">
+
+<div class="container"><h1 class="text-center text-4xl text-bold text-teal-500">{{ $pageTitle }}</h1></div>
+<div class="container px-5 py-12 mx-auto">
     @if(count($schedules) == 0)
         <p>No Buses found!</p>
     @endif
     <div class="flex flex-wrap -mx-4 -my-8">
+      
     @foreach ($schedules as $schedule)
       <div class="py-4 px-4 lg:w-1/3">
         <div class="border-2 border-teal-200 border-opacity-60 rounded-lg h-full flex items-start">
@@ -35,11 +38,16 @@
                 >
                 <a href="/buses/?place={{$schedule->route->destination}}">{{$schedule->route->destination}}</a>
             </li>
+            </ul>
+            @php $via = explode(',', $schedule->route->via) @endphp
+            <ul class="flex">
+            @foreach ($via as $item)
             <li
-                class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
+                class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-2 mr-1 mt-1 text-xs"
                 >
-                <a href="/buses/?place={{$schedule->route->via}}">{{$schedule->route->via}}</a>
+                <a href="/buses/?place={{$item}}">{{$item}}</a>
             </li>
+            @endforeach
             </ul>
             <p class="leading-relaxed mb-5">Departure at - {{ $schedule->departure_time }}</p>
             <ul class="flex">

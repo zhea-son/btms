@@ -19,12 +19,13 @@
                             <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                             @enderror
                         </div>
+
                         <input type="hidden" name="schedule_id" value="{{ $schedule_id }}">
                         <input type="hidden" name="fare" value="{{ $fare }}">
                         <input type="hidden" name="available_seats" value="{{ $available_seats }}">
                         <div class="flex p-1">
                             
-                            <button role="submit" class="p-3 bg-blue-500 text-white hover:bg-blue-400" required>Book</button>
+                            <button role="submit" class="p-3 bg-teal-500 rounded-xl text-white hover:bg-blue-400" required>Book</button>
                         </div>
                     </form>
                 </div>
