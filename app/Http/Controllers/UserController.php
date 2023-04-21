@@ -33,7 +33,6 @@ class UserController extends Controller
 
         //Login
         auth()->login($user);
-
         return redirect('/')->with('message','User registered and Logged in Succesfully!');
         
     }

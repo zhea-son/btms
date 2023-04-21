@@ -22,8 +22,8 @@ class EsewaController extends Controller
         $esewa = new Client($config);
 
         $booking = Booking::findOrFail($request['booking_id']);
-        // $booking->payment_unique_id = $pid;
-        // $booking->save();
+        $booking->payment_unique_id = $pid;
+        $booking->save();
 
         $esewa->process($booking->payment_unique_id , $booking->amount, 0, 0, 0);
 

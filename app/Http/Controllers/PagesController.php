@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Bus;
 use App\Models\User;
 use App\Models\Route;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -31,10 +33,11 @@ class PagesController extends Controller
     }
 
     public function live(){
-        return view('pages.live');
+        $today = 
+        $live_buses = Schedule::whereDate('date', Carbon::now()->format('Y-m-d'))->where('completed',false);
+        return view('buses.index', [
+            'schedules' => $live_buses->filter(request(['place','type']))->Simplepaginate(9)
+        ]);
     }
 
-    public function buses(){
-        return view('pages.buses');
-    }
 }

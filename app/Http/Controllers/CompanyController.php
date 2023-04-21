@@ -130,4 +130,13 @@ class CompanyController extends Controller
     ], compact('schedules'));
     }
 
+    public function my_profile(){
+        $company = Auth::guard('company')->user();
+        return view('company.profile', [
+            'company' => $company,
+        ]);
+    }
+
+    
+
 }

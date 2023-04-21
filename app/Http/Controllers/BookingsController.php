@@ -31,7 +31,7 @@ class BookingsController extends Controller
         $schedules = Schedule::whereHas('route', function ($query) use ($from, $to) {
             $query->where('origin', $from)
                   ->where('destination', $to);
-        })->whereDate('date', $date)->get();
+        })->whereDate('date', $date)->where('completed', false)->get();
 
         $route = "From " . $from . " to " . $to;
 
