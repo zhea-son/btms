@@ -48,6 +48,7 @@ Route::post('/user/logout', [UserController::class, 'logout'])->name('users.logo
 
 // Resource Controller Routes
 Route::resource('buses', BusesController::class);
+Route::get('/buses', [BusesController::class, 'index'])->name('pages.buses');
 
 Route::resource('routes', RoutesController::class);
 

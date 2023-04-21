@@ -48,6 +48,10 @@
                             class="block py-2 pl-3 pr-4 {{ Route::currentRouteName() == 'my_bookings' ? 'text-teal-500' : 'text-gray-700' }} rounded hover:bg-gray-100 md:hover:bg-transparent">My Bookings</a>
                     </li>
                     <li>
+                        <a href="/buses"
+                            class="block py-2 pl-3 pr-4 {{ Route::currentRouteName() == 'pages.buses' ? 'text-teal-500' : 'text-gray-700' }} rounded hover:bg-gray-100 md:hover:bg-transparent">Buses</a>
+                    </li>
+                    <li>
                         <button class="inline-block relative">
                             <a href="{{ route('pages.live') }}" class="block py-2 pl-3">
                                 <p style="color:#cf3d3c"><u>Live Update
