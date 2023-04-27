@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('origin');
             $table->string('destination');
             $table->string('distance');
-            $table->string('estimated_time');
             $table->string('via');
             $table->timestamps();
         });

@@ -21,6 +21,8 @@ return new class extends Migration
             $table->date('date')->format('Y-m-d');
             $table->time('departure_time');
             $table->string('fare');
+            $table->string('estimated_time');
+            $table->string('status')->default('Stand By');
             $table->string('no_of_passengers')->nullable();
             $table->string('income')->nullable();
             $table->boolean('completed')->default(FALSE);

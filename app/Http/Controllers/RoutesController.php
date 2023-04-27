@@ -44,7 +44,6 @@ class RoutesController extends Controller
             'destination' => 'required',
             'via' => 'required',
             'distance' => 'required',
-            'estimated_time' => 'required',
         ]);
         foreach ($formFields as &$value) {
             $value = strip_tags($value);

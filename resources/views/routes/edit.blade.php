@@ -38,14 +38,6 @@
                         </div>
 
                         <div class="mb-4">
-                            <label class="text-xl text-gray-600">Estimated Time</label></br>
-                            <input type="text" class="border-2 border-gray-300 p-2 w-full" name="estimated_time" id="estimated_time" placeholder="in hours" value="{{$route->estimated_time}}" required>
-                            @error('estimated_time')
-                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-4">
                             <label class="text-xl text-gray-600">Via</label></br>
                             <input type="text" class="border-2 border-gray-300 p-2 w-full" name="via" id="via" placeholder="in hours" value="{{$route->via}}" required>
                             @error('via')

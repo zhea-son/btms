@@ -201,7 +201,6 @@
                   <div class="flex-grow pl-6">
                     <h2 class="tracking-widest text-xs title-font font-medium text-indigo-500 mb-1">{{$route->distance}} km</h2>
                     <h1 class="title-font text-xl font-medium text-gray-900 mb-3">{{$route->name}}</h1>
-                    <p class="leading-relaxed mb-5">Estimated Time: {{$route->estimated_time}} hrs.</p>
                     
                     <ul class="flex">
                         <li

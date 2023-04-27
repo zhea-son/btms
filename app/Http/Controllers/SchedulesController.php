@@ -51,7 +51,8 @@ class SchedulesController extends Controller
             'departure_time' => 'required',
             'fare' => 'required',
             'bus_id' => 'required',
-            'route_id' => 'required',   
+            'route_id' => 'required', 
+            'estimated_time' => 'required',
         ]);
         
         foreach ($formFields as &$value) {
@@ -117,7 +118,7 @@ class SchedulesController extends Controller
             'date' => 'required',
             'departure_time' => 'required',
             'fare' => 'required',
-            
+            'estimated_time' => 'required',
         ]);
         foreach ($formFields as &$value) {
             $value = strip_tags($value);
@@ -164,5 +165,39 @@ class SchedulesController extends Controller
     return redirect()->route('company.trips');
 }
 
+public function schedule_info(Schedule $schedule){
+    $via = $schedule->route->via;
+    $vial = explode(',',$via);
+    array_unshift($vial, $schedule->route->origin);
+    array_push($vial, $schedule->route->destination);
+    $len = count($vial);
+    for($i=0; $i<$len; $i++){
+        $vial[$i] = ltrim($vial[$i]);
+    }
+    $count = -1;
+    // dd($vial);
+    return view('schedules.scheduleinfo', ['schedule'=> $schedule,
+                                            'vial' => $vial,
+                                            'count' => $count,
+]);
+}
+
+public function update_status($id, Request $request){
+    $schedule = Schedule::with('bus', 'route')->findOrFail($id);
+    $viaarray = explode(',', $schedule->route->via);
+    array_unshift($viaarray, $schedule->route->origin);
+    array_push($viaarray, $schedule->route->destination);
+    $len = count($viaarray);
+    for($i=0; $i<$len; $i++){
+        $viaarray[$i] = ltrim($viaarray[$i]);
+    }
+    $count = array_search(($request['status']), $viaarray);
+    $schedule->status = $request['status'];
+    $schedule->save();
+    return view('schedules.scheduleinfo',  ['schedule'=> $schedule,
+                                            'vial' => $viaarray,
+                                            'count' => $count,
+    ]);
+}
 
 }

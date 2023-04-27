@@ -50,6 +50,11 @@
             @endforeach
             </ul>
             <p class="leading-relaxed mb-5">Departure at - {{ $schedule->departure_time }}</p>
+            @if($schedule->status != "Stand By")
+            <p class="leading-relaxed mb-5">Status - Arrived at {{ $schedule->status }}</p>
+            @else
+            <p class="leading-relaxed mb-5">Status - {{ $schedule->status }}</p>
+            @endif
             <ul class="flex">
                 <li><p class="leading-relaxed mb-5">Rs. {{ $schedule->fare }}</p></li>
                 <li class="ml-40">

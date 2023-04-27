@@ -55,12 +55,23 @@ class BookingsController extends Controller
     // }
 
     public function booking(Request $request){
-        $schedule = $request['schedule_id'];
-        $fare = $request['fare'];
-        $availableSeats = $request['available_seats'];
+        $schedule = Schedule::with('bus', 'bookings')->findOrFail($request->input('schedule_id'));
+        if($request['available_seats']){
+            $availableSeats = $request['available_seats']; 
+            $fare = $request['fare'];
+        }
+        else{
+            $totalSeats = $schedule->bus->seats;
+            $bookedSeats = $schedule->bookings->sum('seats');
+            if($bookedSeats == $totalSeats){ $schedule->availableSeats = "No Seats Available"; }
+            else{
+            $availableSeats = $totalSeats - $bookedSeats;
+            $fare = $schedule->fare;
+            } 
+        }
         return view('bookings.booking', ['schedule_id' => $request->input('schedule_id'),
-                                        'fare' => $request->input('fare'),
-                                            'available_seats' => $availableSeats
+                                        'fare' => $fare,
+                                        'available_seats' => $availableSeats
     ]);
     }
 

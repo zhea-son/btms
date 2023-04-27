@@ -400,6 +400,11 @@
                           <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                               <ul class="flex">
                                 <li
+                                    class="text-yellow-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
+                                >
+                                  <a href="/company/{{ $schedule->id }}/schedule_info">Start?</a>
+                                </li>
+                                <li
                                     class="text-blue-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
                                 >
                                     <a href="/schedules/{{$schedule->id}}/edit">Edit</a>

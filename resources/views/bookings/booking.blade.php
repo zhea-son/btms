@@ -5,6 +5,7 @@
 @section('content')
     
 <h1 class="text-center text-4xl text-bold text-teal-500">Select Seats</h1><!-- component -->
+<p class="leading-relaxed text-center mb-5">Available Seats - {{ $available_seats }}</p>
 
 <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
