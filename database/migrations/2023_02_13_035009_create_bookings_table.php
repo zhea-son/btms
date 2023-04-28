@@ -16,7 +16,11 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('schedule_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('seats');
+            $table->string('amount');
+            $table->string('payment_unique_id')->nullable();
+            $table->boolean('paid')->default(false);
             // $table->string('contact');
             // $table->string('passenger_contact');
             // $table->string('passenger_age');

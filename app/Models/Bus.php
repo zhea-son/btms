@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Company;
 use App\Models\Schedule;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,6 +22,10 @@ class Bus extends Model
         //         ->orWhere('description', 'like', '%' . request('search') . '%')
         //         ->orWhere('tags', 'like', '%' . request('search') . '%');
         // }
+    }
+
+    public function company(){
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function schedules(){

@@ -4,12 +4,15 @@ namespace App\Models;
 
 use App\Models\Bus;
 use App\Models\Route;
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Schedule extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
 
     public function scopeFilter($query, array $filters){
         if ($filters['place'] ?? false) {
@@ -33,7 +36,12 @@ class Schedule extends Model
         return $this->belongsTo(Route::class, 'route_id');
     }
 
+    public function company(){
+        return $this->belongsTo(Company::class, 'company_id');
+    }
+
     public function bookings(){
         return $this->hasMany(Booking::class, 'schedule_id');
     }
+    
 }

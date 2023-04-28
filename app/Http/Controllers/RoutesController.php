@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoutesController extends Controller
 {
@@ -43,17 +44,20 @@ class RoutesController extends Controller
             'destination' => 'required',
             'via' => 'required',
             'distance' => 'required',
-            'estimated_time' => 'required',
         ]);
         foreach ($formFields as &$value) {
             $value = strip_tags($value);
         }
 
         $formFields['name']= "From ". $formFields['origin']." To ".$formFields['destination']." via. ". $formFields['via'];
+        $formFields['company_id'] = Auth::guard('company')->user()->id;
+        
+        $via = explode(',', $formFields['via']);
+        
         Route::create($formFields);
 
 
-        return redirect('/routes')->with('message', "Route created successfully!");
+        return redirect('/company/routes')->with('message', "Route created successfully!");
     }
 
     /**
@@ -102,7 +106,7 @@ class RoutesController extends Controller
 
         $route->update($formFields);
 
-        return redirect('/routes')->with('message', "Route updated successfully!");
+        return redirect('/company/routes')->with('message', "Route updated successfully!");
     }
 
     /**

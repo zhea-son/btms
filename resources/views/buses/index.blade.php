@@ -5,70 +5,74 @@
 @section('content')  
 
 
-<div class="container px-2 py-12 mx-auto">
-    @if(count($buses) == 0)
-        <p>No Posts found!</p>
+<div class="container"><h1 class="text-center text-4xl text-bold text-teal-500">{{ $pageTitle }}</h1></div>
+<div class="container px-5 py-12 mx-auto">
+    @if(count($schedules) == 0)
+        <p>No Buses found!</p>
     @endif
-    <div class="flex flex-wrap -m-4">
-        @foreach ($buses as $bus)
-        <div class="p-4 md:w-1/3">
-            <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-              <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{$bus->image ? '/storage/' .$bus->image : '/assets/images/janeho.png'}}" alt="bus">
-                
-              {{-- <x-bus-tags :tagsCsv="$bus->tags" /> --}}
-              
-                {{-- <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{{ $bus->genre }}</h2> --}}
-                <h2 class="title-font text-lg font-medium text-red-700 mb-3">{{ $bus->number_plate }}</h2>
-                {{-- <h2 class="title-font text-lg font-medium text-red-700 mb-3">{{ $bus->to }}</h2> --}}
-
-                <ul class="flex">
-                    {{-- <li
-                        class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                    >
-                        <a href="/buses/?to={{$bus->to}}">{{$bus->to}}</a>
-                    </li>
-                    <li
-                    class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                    >
-                    <a href="/buses/?from={{$bus->from}}">{{$bus->from}}</a>
-                </li> --}}
-                <li
-                    class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                    >
-                    <a href="/buses/?type={{$bus->type}}">{{$bus->type}}</a>
-                </li>
-                </ul>
-                <ul class="flex">
-                
-                <li
-                    class="text-blue-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
-                >
-                    <a href="/buses/{{$bus->id}}/edit">Edit</a>
-                </li>
-                <li
-                    class="text-red-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
-                >
-                <form method="POST" action="/buses/{{$bus->id}}">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Delete</button>        
-                  </form>
-                </li>
-                <li
-                    class="text-teal-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
-                >
-                    <a href="/schedules/{{$bus->id}}/create">Add to Schedule</a>
-                </li>
-                </ul>
-                {{-- <p class="leading-relaxed mb-3">Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.</p> --}}
-                
-              </div>
-        </div>
-            
+    <div class="flex flex-wrap -mx-4 -my-8">
       
-        @endforeach
+    @foreach ($schedules as $schedule)
+      <div class="py-4 px-4 lg:w-1/3">
+        <div class="border-2 border-teal-200 border-opacity-60 rounded-lg h-full flex items-start">
+          <div class="mt-4 w-12 flex-shrink-0 flex flex-col text-center leading-none">
+            <span class="text-gray-500 pb-2 mb-2 border-b-2 border-gray-200">{{ date_create_from_format('U', strtotime($schedule->date))->format('F') }}</span>
+            <span class="font-medium text-lg text-gray-800 title-font leading-none">{{ date_create_from_format('U', strtotime($schedule->date))->format('d') }}</span>
+          </div>
+          <div class="flex-grow pl-6">
+            <h2 class="tracking-widest text-xs title-font font-medium text-teal-500 mb-1">{{ $schedule->company->company_name }}</h2>
+            <h1 class="title-font text-xl font-medium text-gray-900 mb-3">{{ $schedule->route->name }}</h1>
+            <ul class="flex">
+            <li
+                class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
+                >
+                <a href="/buses/?type={{$schedule->bus->type}}">{{$schedule->bus->type}}</a>
+            </li>
+            <li
+                class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
+                >
+                <a href="/buses/?place={{$schedule->route->origin}}">{{$schedule->route->origin}}</a>
+            </li>
+            <li
+                class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
+                >
+                <a href="/buses/?place={{$schedule->route->destination}}">{{$schedule->route->destination}}</a>
+            </li>
+            </ul>
+            @php $via = explode(',', $schedule->route->via) @endphp
+            <ul class="flex">
+            @foreach ($via as $item)
+            <li
+                class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-2 mr-1 mt-1 text-xs"
+                >
+                <a href="/buses/?place={{$item}}">{{$item}}</a>
+            </li>
+            @endforeach
+            </ul>
+            <p class="leading-relaxed mb-5">Departure at - {{ $schedule->departure_time }}</p>
+            @if($schedule->status != "Stand By")
+            <p class="leading-relaxed mb-5">Status - Arrived at {{ $schedule->status }}</p>
+            @else
+            <p class="leading-relaxed mb-5">Status - {{ $schedule->status }}</p>
+            @endif
+            <ul class="flex">
+                <li><p class="leading-relaxed mb-5">Rs. {{ $schedule->fare }}</p></li>
+                <li class="ml-40">
+                    <form action="/booking" method="POST">
+                        @csrf
+                        <input type="hidden" name="schedule_id" value="{{ $schedule->id }}">
+                        <button type="submit" class="font-medium text-teal-600 dark:text-blue-500 hover:underline">Book Ticket</button>
+                    </form>
+                </li>
+            </ul>
+            
+          </div>
+        </div>
+      </div>
+      @endforeach
     </div>
+    <div class="p-12 justify-center">{{$schedules->links()}}</div>
 
-    <div class="p-12 justify-center">{{$buses->links()}}</div>
 </div>
+
 @endsection

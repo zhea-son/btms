@@ -1,10 +1,10 @@
-@extends('layouts.layout')
+@extends('company.master')
 
 @section('title','Edit Schedule')
 
 @section('content')
     
-<h1 class="text-center text-4xl text-bold text-teal-500"Update Schedule</h1><!-- component -->
+<h1 class="text-center text-4xl text-bold text-teal-500">Update Schedule</h1><!-- component -->
 
 <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -61,8 +61,13 @@
                             @enderror
                         </div>
 
-                        
-
+                        <div class="mb-4">
+                            <label class="text-xl text-gray-600">Estimated Time</label></br>
+                            <input type="text" class="border-2 border-gray-300 p-2 w-full" name="estimated_time" id="estimated_time" placeholder="in hours" value="{{$schedule->estimated_time}}" required>
+                            @error('estimated_time')
+                            <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+                            @enderror
+                        </div>
                         
                         <div class="flex p-1">
                             

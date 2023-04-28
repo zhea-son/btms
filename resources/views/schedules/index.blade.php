@@ -40,11 +40,17 @@
                         >
                         <a href="/schedules/?place={{$schedule->route->destination}}">{{$schedule->route->destination}}</a>
                     </li>
-                    <li
-                        class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                        >
-                        <a href="/schedules/?place={{$schedule->route->via}}">{{$schedule->route->via}}</a>
+                    </ul>
+                    @php $via = explode(',', $schedule->route->via) @endphp
+                    <ul class="flex">
+                      @foreach ($via as $item)
+                          
+                      <li
+                      class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
+                      >
+                      <a href="/schedules/?place={{$item}}">{{$item}}</a>
                     </li>
+                    @endforeach
                     </ul>
                     <ul class="flex">
                       <li

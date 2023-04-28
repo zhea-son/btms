@@ -17,6 +17,7 @@ class BusFactory extends Factory
     public function definition()
     {
         return [
+            'company_id' => 1,
             'number_plate' => fake()->unique()->bothify('??-Pra-##-###-??-####'),
             'contact' => fake()->phoneNumber(),
             'seats' => fake()->numberBetween(15,80),

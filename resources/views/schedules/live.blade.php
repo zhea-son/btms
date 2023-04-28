@@ -54,7 +54,7 @@
                     {{ $schedule->departure_time }}
                 </td>
                 <td class="px-6 py-4">
-                    Ready to Go
+                    Arrived at {{ $schedule->status }}
                 </td>
                 <td class="px-6 py-4">
                     {{ $schedule->fare }}

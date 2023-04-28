@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Bus;
+use App\Models\User;
+use App\Models\Route;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PagesController extends Controller
 {
     public function home(){
-        return view('pages.home');
+        $buses = Bus::count();
+        $users = User::count();
+        $trips = 0;
+        $places = Route::count(['origin']);
+        return view('pages.home', compact(['buses','users','places','trips']));
     }
 
     public function about(){
@@ -22,15 +32,13 @@ class PagesController extends Controller
         return view('pages.login');
     }
 
-    public function login_comp(){
-        return view('pages.login_comp');
-    }
-
     public function live(){
-        return view('pages.live');
-    }
-
-    public function buses(){
-        return view('pages.buses');
+        $pageTitle = "Today's Buses";
+        $live_buses = Schedule::whereDate('date', Carbon::now()->format('Y-m-d'))->where('completed',false);
+        dd();
+        return view('buses.index', [
+            'schedules' => $live_buses->filter(request(['place','type']))->Simplepaginate(9),
+            'pageTitle' => $pageTitle 
+        ]);
     }
 }

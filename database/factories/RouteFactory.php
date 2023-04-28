@@ -17,6 +17,7 @@ class RouteFactory extends Factory
     public function definition()
     {
         return [
+            'company_id' => 1,
             'origin' => fake()->city(),
             'destination' => fake()->city(),
             'estimated_time' => fake()->numberBetween(2,36),

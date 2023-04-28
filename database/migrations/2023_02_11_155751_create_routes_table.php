@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('routes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('origin');
             $table->string('destination');
             $table->string('distance');
-            $table->string('estimated_time');
             $table->string('via');
             $table->timestamps();
         });

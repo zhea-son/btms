@@ -7,6 +7,7 @@ use App\Models\Bus;
 use App\Models\Route;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SchedulesController extends Controller
 {
@@ -31,10 +32,8 @@ class SchedulesController extends Controller
      */
     public function create()
     {
-        $buses = Bus::all();
-        $routes = Route::all();
-
-        
+        $buses = Auth::guard('company')->user()->buses;
+        $routes = Auth::guard('company')->user()->routes;
 
         return view('schedules.create',compact('buses','routes'));
     }
@@ -52,12 +51,15 @@ class SchedulesController extends Controller
             'departure_time' => 'required',
             'fare' => 'required',
             'bus_id' => 'required',
-            'route_id' => 'required',   
+            'route_id' => 'required', 
+            'estimated_time' => 'required',
         ]);
         
         foreach ($formFields as &$value) {
             $value = strip_tags($value);
         }
+
+        $formFields['company_id'] = Auth::guard('company')->user()->id;
 
         $schedule = Schedule::where('bus_id', $formFields['bus_id'])
                                 ->where('route_id', $formFields['route_id'])
@@ -71,7 +73,7 @@ class SchedulesController extends Controller
         
         else{
             Schedule::create($formFields);
-            return redirect('/schedules')->with('message', "Schedule created successfully!");
+            return redirect('/company/schedules')->with('message', "Schedule created successfully!");
 
         }
 
@@ -116,14 +118,14 @@ class SchedulesController extends Controller
             'date' => 'required',
             'departure_time' => 'required',
             'fare' => 'required',
-            
+            'estimated_time' => 'required',
         ]);
         foreach ($formFields as &$value) {
             $value = strip_tags($value);
         }
         $schedule->update($formFields);
 
-        return redirect('/schedules')->with('message', "Schedule updated successfully!");
+        return redirect('/company/schedules')->with('message', "Schedule updated successfully!");
     }
 
     /**
@@ -144,5 +146,58 @@ class SchedulesController extends Controller
         return view('schedules.live', compact('schedules'));
     }
 
+    public function completed($id)
+{
+    $schedule = Schedule::findOrFail($id);
+    $schedule->completed = true;
+    $schedule->completed_at = now(); // Update completed_at to the current timestamp
+    $bookedSeats = $schedule->bookings->sum('seats');
+    $schedule->no_of_passengers = $bookedSeats; // Update no_of_passengers to bookedSeats
+    $schedule->income = $bookedSeats * $schedule->fare; // Update income
+    $schedule->save();
+
+    $bookings = $schedule->bookings->where('paid', false);
+    foreach($bookings as $booking){
+        $booking->paid = true;
+        $booking->save();
+    }
+
+    return redirect()->route('company.trips');
+}
+
+public function schedule_info(Schedule $schedule){
+    $via = $schedule->route->via;
+    $vial = explode(',',$via);
+    array_unshift($vial, $schedule->route->origin);
+    array_push($vial, $schedule->route->destination);
+    $len = count($vial);
+    for($i=0; $i<$len; $i++){
+        $vial[$i] = ltrim($vial[$i]);
+    }
+    $count = -1;
+    // dd($vial);
+    return view('schedules.scheduleinfo', ['schedule'=> $schedule,
+                                            'vial' => $vial,
+                                            'count' => $count,
+]);
+}
+
+public function update_status($id, Request $request){
+    $schedule = Schedule::with('bus', 'route')->findOrFail($id);
+    $viaarray = explode(',', $schedule->route->via);
+    array_unshift($viaarray, $schedule->route->origin);
+    array_push($viaarray, $schedule->route->destination);
+    $len = count($viaarray);
+    for($i=0; $i<$len; $i++){
+        $viaarray[$i] = ltrim($viaarray[$i]);
+    }
+    $count = array_search(($request['status']), $viaarray);
+    $schedule->status = $request['status'];
+    $schedule->save();
+    return view('schedules.scheduleinfo',  ['schedule'=> $schedule,
+                                            'vial' => $viaarray,
+                                            'count' => $count,
+    ]);
+}
 
 }
