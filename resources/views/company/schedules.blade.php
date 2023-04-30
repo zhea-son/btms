@@ -373,7 +373,7 @@
                           <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                             <div class="flex px-2 py-1">
                               <div class="flex flex-col justify-center">
-                                <h6 class="mb-0 text-sm leading-normal dark:text-white">{{ $schedule->route->name }}</h6>
+                                <h6 class="mb-0 text-sm leading-normal dark:text-white"><a href="{{ route('schedules.view_bookings', $schedule->id) }}">{{ $schedule->route->name }}</h6>
                               </div>
                             </div>
                           </td>
@@ -389,20 +389,16 @@
                           <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                             <span class="">{{ $schedule->fare }}</span>
                           </td>
-                          {{-- <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                            <li class="bg-gradient-to-tl from-emerald-500 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white"><a href="/buses/?type={{$schedule->route->origin}}">{{$schedule->route->origin}}</a></li>
-                            <li class="bg-gradient-to-tl from-emerald-500 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white"><a href="/buses/?type={{$schedule->route->destination}}">{{$schedule->route->destination}}</a></li>
-                            <li class="bg-gradient-to-tl from-emerald-500 to-teal-400 px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white"><a href="/buses/?type={{$schedule->route->via}}">{{$schedule->route->via}}</a></li>
-                          </td> --}}
+                         
                           <td class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                             <span class="">{{ $schedule->availableSeats }}</span>
                           </td>
                           <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
                               <ul class="flex">
                                 <li
-                                    class="text-yellow-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
+                                    class="text-pink-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
                                 >
-                                  <a href="/company/{{ $schedule->id }}/schedule_info">Start?</a>
+                                  <a href="/company/{{ $schedule->id }}/schedule_info">Start the Trip</a>
                                 </li>
                                 <li
                                     class="text-blue-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"

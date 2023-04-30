@@ -54,6 +54,7 @@ Route::resource('routes', RoutesController::class);
 
 Route::resource('schedules', SchedulesController::class);
 Route::put('/schedules/{id}/complete', [SchedulesController::class , 'completed'])->name('schedules.complete');
+Route::get('/schedules/{id}/view-bookings', [SchedulesController::class , 'view_bookings'])->name('schedules.view_bookings');
 Route::get('/company/{schedule}/schedule_info', [SchedulesController::class, 'schedule_info'])->name('schedule.info');
 Route::put('/company/{schedule}/update_status', [SchedulesController::class, 'update_status'])->name('schedule.update_status');
 

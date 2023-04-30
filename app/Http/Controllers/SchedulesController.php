@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use Carbon\Carbon;
 use App\Models\Bus;
 use App\Models\Route;
@@ -198,6 +199,15 @@ public function update_status($id, Request $request){
                                             'vial' => $viaarray,
                                             'count' => $count,
     ]);
+}
+
+public function view_bookings($id){
+    $bookings = Booking::where('schedule_id', $id)->with('user','schedule')->get();
+    $seats_booked = $bookings->sum('seats');
+    $schedule = Schedule::where('id',$id)->with('bus')->first();
+    $total_seats = $schedule->bus->seats;
+    // dd($total_seats);
+    return view('schedules.view_bookings',compact('bookings','seats_booked','total_seats'));
 }
 
 }

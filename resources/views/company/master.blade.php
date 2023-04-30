@@ -17,7 +17,9 @@
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <!-- Main Styling -->
     <link href="{{ asset('template/assets/css/argon-dashboard-tailwind.css?v=1.0.1') }}" rel="stylesheet" />
-  </head>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+</head>
 
   {{-- @if(session('message'))
     <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
