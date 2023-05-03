@@ -183,19 +183,25 @@
               <div class="flex-none w-full max-w-full px-3">
                 <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border flex justify-end">
                   <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                    <h6 class="dark:text-white">Routes table</h6>
-                    <a class="flex text-red bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"  href="{{ route('routes.create') }}"><p>Add Route</p></a>
+                    <div class="grid grid-cols-4 gap-4 my-2 ">
+                      <div>
+                        <h3 class="ml-2 dark:text-white"><b>Routes Table</b></h3>
+                      </div>
+                      <div class=""></div>
+                      <div class=""></div>
+                      <a class="flex text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full w-32 mr-5 text-sm px-5 py-2.5 text-center mr-3 md:mr-0 "  href="{{ route('routes.create') }}"><p>Add Route</p></a>
+                    </div>
                   </div>
 
                   @if(count($routes) == 0)
                     <p>No Routes found!</p>
                   @endif
     <div class="flex flex-wrap -m-4">
-        <div class="container px-5 py-24 mx-auto">
+        <div class="container px-5 py-12 mx-auto">
             <div class="flex flex-wrap -mx-4 -my-8">
                 @foreach ($routes as $route)
                   @php $viaarray = explode(',', $route->via) @endphp
-              <div class="py-8 px-4 lg:w-1/3 border border-teal-500">
+              <div class="ml-4 py-4 lg:w-1/3 border border-teal-500">
                 <div class="h-full flex items-start">
                   
                   <div class="flex-grow pl-6">

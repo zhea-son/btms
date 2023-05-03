@@ -13,6 +13,8 @@
       </div>
       @auth
 
+      @elseif(Auth::guard('company')->check())
+
       @else
           
       <div class="flex flex-wrap -mx-4 -mb-10 text-center">

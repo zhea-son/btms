@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -33,21 +34,17 @@ class UserController extends Controller
 
         //Login
         auth()->login($user);
-        return redirect('/')->with('message','User registered and Logged in Succesfully!');
-        
+        return redirect('/')->with('message','User registered and Logged in Succesfully!');       
     }
 
     public function authenticate(Request $request){
         $formFields = $request->validate([
-            
             'email' => ['required','email'],
             'password' => 'required',
-
         ]);
 
         if(auth()->attempt($formFields)){
             $request->session()->regenerate();
-
             return redirect('/')->with('message',"Logged in succesfully.");
         }
         

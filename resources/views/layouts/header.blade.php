@@ -9,16 +9,32 @@
             <div class="flex md:order-2">
                 @auth
 
-                <span class="inline-flex font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 font-bold uppercase">Welcome {{ auth()->user()->name }} </span>
+                <div class="relative">
+                    <button type="button" class="inline-flex items-center px-4 py-2 border border-teal-300 shadow-sm text-sm font-medium rounded-md text-teal-700 bg-white hover:bg-teal-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="dropdown-button" aria-expanded="false" aria-haspopup="true">
+                      {{ auth()->user()->name }}
+                      <!-- Heroicon name: chevron-down -->
+                      <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                      </svg>
+                    </button>
+                  
+                    <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-teal ring-opacity-5" id="dropdown-menu">
+                      <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-button">
+                        <a href="/user/my_bookings" class="block px-4 py-2 text-sm text-teal-700 hover:bg-teal-100 hover:text-teal-900" role="menuitem">My Bookings</a>
+                        <a href="/user/my_history" class="block px-4 py-2 text-sm text-teal-700 hover:bg-teal-100 hover:text-teal-900" role="menuitem">My History</a>
+                      </div>
+                    </div>
+                  </div>
+            
                 <form method="POST" action="/user/logout" class="inline">
                     @csrf
                     <button type="submit" class="ml-2 text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 ">Logout</button>
-                    
                 </form>
 
-                {{-- @elseif(middleware('company'))
-                <button type="button" class="text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 "><a href={{ route('company.dashboard') }}>Dashboard</a></button> --}}
-
+                @elseif(Auth::guard('company')->check())
+                <button type="button" class="text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 "><a href={{ route('company.dashboard') }}>Dashboard</a></button>
+                <a href="/company/logout" class="ml-2 text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 ">Logout</a>
+                
                 @else
                 <button type="button" class="text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 "><a href={{ route('pages.login') }}>Log In</a></button>
                 <button type="button" class="ml-2 text-white bg-teal-600 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 "><a href={{ route('pages.sign_up') }}>Sign Up</a></button>
@@ -44,10 +60,6 @@
                             class="block py-2 pl-3 pr-4 {{ Route::currentRouteName() == 'search_buses' ? 'text-teal-500' : 'text-gray-700' }} rounded hover:bg-gray-100 md:hover:bg-transparent">Search</a>
                     </li>
                     <li>
-                        <a href="{{ route('my_bookings') }}"
-                            class="block py-2 pl-3 pr-4 {{ Route::currentRouteName() == 'my_bookings' ? 'text-teal-500' : 'text-gray-700' }} rounded hover:bg-gray-100 md:hover:bg-transparent">My Bookings</a>
-                    </li>
-                    <li>
                         <a href="/buses"
                             class="block py-2 pl-3 pr-4 {{ Route::currentRouteName() == 'pages.buses' ? 'text-teal-500' : 'text-gray-700' }} rounded hover:bg-gray-100 md:hover:bg-transparent">Buses</a>
                     </li>
@@ -65,3 +77,13 @@
         </div>
     </nav>
 </div>
+
+<script>
+    const dropdownButton = document.getElementById('dropdown-button');
+const dropdownMenu = document.getElementById('dropdown-menu');
+
+dropdownButton.addEventListener('click', function() {
+  dropdownMenu.classList.toggle('hidden');
+});
+</script>
+

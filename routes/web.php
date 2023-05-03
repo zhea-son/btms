@@ -44,7 +44,7 @@ Route::get('/user/register', [UserController::class, 'user_signup'])->name('user
 Route::post('/user/new', [UserController::class, 'new_user'])->name('users.new');
 Route::get('/user/login', [UserController::class, 'user_login'])->name('users.login')->middleware('guest');
 Route::post('/user/authenticate', [UserController::class, 'authenticate'])->name('users.authenticate');
-Route::post('/user/logout', [UserController::class, 'logout'])->name('users.logout');
+Route::post('/user/logout', [UserController::class, 'logout'])->name('users.logout')->middleware('web');
 
 // Resource Controller Routes
 Route::resource('buses', BusesController::class);
@@ -53,27 +53,27 @@ Route::get('/buses', [BusesController::class, 'index'])->name('pages.buses');
 Route::resource('routes', RoutesController::class);
 
 Route::resource('schedules', SchedulesController::class);
-Route::put('/schedules/{id}/complete', [SchedulesController::class , 'completed'])->name('schedules.complete');
-Route::get('/schedules/{id}/view-bookings', [SchedulesController::class , 'view_bookings'])->name('schedules.view_bookings');
-Route::get('/company/{schedule}/schedule_info', [SchedulesController::class, 'schedule_info'])->name('schedule.info');
-Route::put('/company/{schedule}/update_status', [SchedulesController::class, 'update_status'])->name('schedule.update_status');
+Route::put('/schedules/{id}/complete', [SchedulesController::class , 'completed'])->name('schedules.complete')->middleware('company');
+Route::get('/schedules/{id}/view-bookings', [SchedulesController::class , 'view_bookings'])->name('schedules.view_bookings')->middleware('company');
+Route::get('/company/{schedule}/schedule_info', [SchedulesController::class, 'schedule_info'])->name('schedule.info')->middleware('company');
+Route::put('/company/{schedule}/update_status', [SchedulesController::class, 'update_status'])->name('schedule.update_status')->middleware('company');
 
 // Bookings Routes
 Route::get('/search_buses', [BookingsController::class, 'show_search'])->name('search_buses');
 Route::post('/search', [BookingsController::class, 'search']);
-Route::post('/booking', [BookingsController::class, 'booking'])->middleware('auth');
-Route::post('/hand-cash', [BookingsController::class, 'pay_on_bus'])->middleware('auth');
-Route::post('/bookings/{booking}/details', [BookingsController::class, 'booking_details'])->middleware('auth');
-Route::post('/user/bookings', [BookingsController::class, 'store'])->middleware('auth');
-Route::delete('/user/bookings/{booking}', [BookingsController::class, 'destroy'])->middleware('auth');
-Route::get('/user/my_bookings', [BookingsController::class, 'my_bookings'])->name('my_bookings')->middleware('auth');
-Route::get('/user/my_history', [BookingsController::class, 'my_history'])->name('my_history')->middleware('auth');
+Route::post('/booking', [BookingsController::class, 'booking'])->middleware('web');
+Route::post('/hand-cash', [BookingsController::class, 'pay_on_bus'])->middleware('web');
+Route::post('/bookings/{booking}/details', [BookingsController::class, 'booking_details'])->middleware('web');
+Route::post('/user/bookings', [BookingsController::class, 'store'])->middleware('web');
+Route::delete('/user/bookings/{booking}', [BookingsController::class, 'destroy'])->middleware('web');
+Route::get('/user/my_bookings', [BookingsController::class, 'my_bookings'])->name('my_bookings')->middleware('web');
+Route::get('/user/my_history', [BookingsController::class, 'my_history'])->name('my_history')->middleware('web');
 
 
 /* Payment Routes */
-Route::post('/payment', [EsewaController::class, 'esewa_pay']);
-Route::get('/payment/success', [EsewaController::class, 'esewa_pay_success']);
-Route::get('/payment/failure', [EsewaController::class, 'esewa_pay_failure']);
+Route::post('/payment', [EsewaController::class, 'esewa_pay'])->middleware('web');
+Route::get('/payment/success', [EsewaController::class, 'esewa_pay_success'])->middleware('web');
+Route::get('/payment/failure', [EsewaController::class, 'esewa_pay_failure'])->middleware('web');
 
 /* Company Routes */
 Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name('company.dashboard')->middleware('company');
@@ -82,21 +82,21 @@ Route::get('/company/signup', [CompanyController::class, 'show_signup'])->name('
 
 Route::get('/company/login', [CompanyController::class, 'show_login'])->name('company.login')->middleware('guest');
 
-Route::post('/company/register/new', [CompanyController::class, 'register'])->name('company.register');
+Route::post('/company/register/new', [CompanyController::class, 'register'])->name('company.register')->middleware('guest');
 
 Route::post('/company/authenticate', [CompanyController::class, 'authenticate'])->name('company.authenticate');
 
-Route::get('/company/logout', [CompanyController::class, 'logout'])->name('company.logout');
+Route::get('/company/logout', [CompanyController::class, 'logout'])->name('company.logout')->middleware('company');
 
-Route::get('/company/buses', [CompanyController::class, 'my_buses'])->name('company.buses');
+Route::get('/company/buses', [CompanyController::class, 'my_buses'])->name('company.buses')->middleware('company');
 
-Route::get('/company/routes', [CompanyController::class, 'my_routes'])->name('company.routes');
+Route::get('/company/routes', [CompanyController::class, 'my_routes'])->name('company.routes')->middleware('company');
 
-Route::get('/company/schedules', [CompanyController::class, 'my_schedules'])->name('company.schedules');
+Route::get('/company/schedules', [CompanyController::class, 'my_schedules'])->name('company.schedules')->middleware('company');
 
-Route::get('/company/trips', [CompanyController::class, 'my_trips'])->name('company.trips');
+Route::get('/company/trips', [CompanyController::class, 'my_trips'])->name('company.trips')->middleware('company');
 
-Route::get('/company/profile', [CompanyController::class, 'my_profile'])->name('company.profile');
+Route::get('/company/profile', [CompanyController::class, 'my_profile'])->name('company.profile')->middleware('company');
 
 
 

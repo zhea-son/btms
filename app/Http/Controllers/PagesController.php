@@ -9,6 +9,7 @@ use App\Models\Route;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
@@ -29,13 +30,12 @@ class PagesController extends Controller
     }
 
     public function login(){
-        return view('pages.login');
+        return view('pages.login');  
     }
 
     public function live(){
         $pageTitle = "Today's Buses";
         $live_buses = Schedule::whereDate('date', Carbon::now()->format('Y-m-d'))->where('completed',false);
-        dd();
         return view('buses.index', [
             'schedules' => $live_buses->filter(request(['place','type']))->Simplepaginate(9),
             'pageTitle' => $pageTitle 

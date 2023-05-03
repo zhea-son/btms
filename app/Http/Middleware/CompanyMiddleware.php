@@ -17,12 +17,9 @@ class CompanyMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-
         if(!Auth::guard('company')->check()){
-            return redirect()->route('company.login')->with('message',"Please Login First");
-            
+            return redirect()->route('company.login')->with('message',"Please Login First");  
         }
-
         return $next($request);
     }
 }

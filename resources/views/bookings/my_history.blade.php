@@ -92,6 +92,8 @@
     </table>
 </div>
 @endif
+<a href="/user/my_bookings" class="py-12 text-xl text-teal-500 underline">See my Bookings</a>
+
 
 
 @endsection
