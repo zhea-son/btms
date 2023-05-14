@@ -108,10 +108,15 @@ class BookingsController extends Controller
         foreach($bookings as $booking){
             $today = Carbon::today();
             $daysRemaining = $today->diffInDays($booking->schedule->date, false);
-            $booking->status = $daysRemaining . " Days Remaining";
+            if($booking->status == "Stand By"){
+                $booking->bus_status = $daysRemaining . " Days Remaining";
+            }else{
+                $booking->bus_status = $booking->status;
+            }
         }
 
         // dd($booking->status);
+        return $bookings;
         
         return view('bookings.my_bookings', compact('bookings'));
     }

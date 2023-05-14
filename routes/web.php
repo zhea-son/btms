@@ -44,7 +44,7 @@ Route::get('/user/register', [UserController::class, 'user_signup'])->name('user
 Route::post('/user/new', [UserController::class, 'new_user'])->name('users.new');
 Route::get('/user/login', [UserController::class, 'user_login'])->name('users.login')->middleware('guest');
 Route::post('/user/authenticate', [UserController::class, 'authenticate'])->name('users.authenticate');
-Route::post('/user/logout', [UserController::class, 'logout'])->name('users.logout')->middleware('web');
+Route::post('/user/logout', [UserController::class, 'logout'])->name('users.logout')->middleware('auth');
 
 // Resource Controller Routes
 Route::resource('buses', BusesController::class);
@@ -61,19 +61,19 @@ Route::put('/company/{schedule}/update_status', [SchedulesController::class, 'up
 // Bookings Routes
 Route::get('/search_buses', [BookingsController::class, 'show_search'])->name('search_buses');
 Route::post('/search', [BookingsController::class, 'search']);
-Route::post('/booking', [BookingsController::class, 'booking'])->middleware('web');
-Route::post('/hand-cash', [BookingsController::class, 'pay_on_bus'])->middleware('web');
-Route::post('/bookings/{booking}/details', [BookingsController::class, 'booking_details'])->middleware('web');
-Route::post('/user/bookings', [BookingsController::class, 'store'])->middleware('web');
-Route::delete('/user/bookings/{booking}', [BookingsController::class, 'destroy'])->middleware('web');
-Route::get('/user/my_bookings', [BookingsController::class, 'my_bookings'])->name('my_bookings')->middleware('web');
-Route::get('/user/my_history', [BookingsController::class, 'my_history'])->name('my_history')->middleware('web');
+Route::post('/booking', [BookingsController::class, 'booking'])->middleware('auth');
+Route::post('/hand-cash', [BookingsController::class, 'pay_on_bus'])->middleware('auth');
+Route::post('/bookings/{booking}/details', [BookingsController::class, 'booking_details'])->middleware('auth');
+Route::post('/user/bookings', [BookingsController::class, 'store'])->middleware('auth');
+Route::delete('/user/bookings/{booking}', [BookingsController::class, 'destroy'])->middleware('auth');
+Route::get('/user/my_bookings', [BookingsController::class, 'my_bookings'])->name('my_bookings')->middleware('auth');
+Route::get('/user/my_history', [BookingsController::class, 'my_history'])->name('my_history')->middleware('auth');
 
 
 /* Payment Routes */
-Route::post('/payment', [EsewaController::class, 'esewa_pay'])->middleware('web');
-Route::get('/payment/success', [EsewaController::class, 'esewa_pay_success'])->middleware('web');
-Route::get('/payment/failure', [EsewaController::class, 'esewa_pay_failure'])->middleware('web');
+Route::post('/payment', [EsewaController::class, 'esewa_pay'])->middleware('auth');
+Route::get('/payment/success', [EsewaController::class, 'esewa_pay_success'])->middleware('auth');
+Route::get('/payment/failure', [EsewaController::class, 'esewa_pay_failure'])->middleware('auth');
 
 /* Company Routes */
 Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name('company.dashboard')->middleware('company');
@@ -98,6 +98,6 @@ Route::get('/company/trips', [CompanyController::class, 'my_trips'])->name('comp
 
 Route::get('/company/profile', [CompanyController::class, 'my_profile'])->name('company.profile')->middleware('company');
 
-
+Route::put('/company/{id}/edit', [CompanyController::class, 'edit'])->name('company.edit')->middleware('company');
 
 

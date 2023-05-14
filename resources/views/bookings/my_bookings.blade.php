@@ -79,7 +79,7 @@
 
                 </td>
                 <td class="px-6 py-4">
-                    {{ $booking->status }}
+                    {{ $booking->bus_status }}
                 </td>
                 <td class="px-6 py-4">
                     <ul>

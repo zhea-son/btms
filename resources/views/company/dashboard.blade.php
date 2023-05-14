@@ -267,7 +267,7 @@
                   <div class="flex-none w-2/3 max-w-full px-3">
                     <div>
                       <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Total Buses</p>
-                      <h5 class="mb-2 font-bold dark:text-white">$53,000</h5>
+                      <h5 class="mb-2 font-bold dark:text-white">{{ count($buses) }}</h5>
                       <p class="mb-0 dark:text-white dark:opacity-60">
                         <span class="text-sm font-bold leading-normal text-emerald-500">+55%</span>
                         since yesterday
@@ -291,8 +291,8 @@
                 <div class="flex flex-row -mx-3">
                   <div class="flex-none w-2/3 max-w-full px-3">
                     <div>
-                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Today's Users</p>
-                      <h5 class="mb-2 font-bold dark:text-white">2,300</h5>
+                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Total Routes</p>
+                      <h5 class="mb-2 font-bold dark:text-white">{{ count($routes) }}</h5>
                       <p class="mb-0 dark:text-white dark:opacity-60">
                         <span class="text-sm font-bold leading-normal text-emerald-500">+3%</span>
                         since last week
@@ -316,8 +316,8 @@
                 <div class="flex flex-row -mx-3">
                   <div class="flex-none w-2/3 max-w-full px-3">
                     <div>
-                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">New Clients</p>
-                      <h5 class="mb-2 font-bold dark:text-white">+3,462</h5>
+                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Upcoming Schedules</p>
+                      <h5 class="mb-2 font-bold dark:text-white">{{ count($schedules) }}</h5>
                       <p class="mb-0 dark:text-white dark:opacity-60">
                         <span class="text-sm font-bold leading-normal text-red-600">-2%</span>
                         since last quarter
@@ -341,8 +341,8 @@
                 <div class="flex flex-row -mx-3">
                   <div class="flex-none w-2/3 max-w-full px-3">
                     <div>
-                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Sales</p>
-                      <h5 class="mb-2 font-bold dark:text-white">$103,430</h5>
+                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Completed Trips</p>
+                      <h5 class="mb-2 font-bold dark:text-white">{{ count($trips) }}</h5>
                       <p class="mb-0 dark:text-white dark:opacity-60">
                         <span class="text-sm font-bold leading-normal text-emerald-500">+5%</span>
                         than last month

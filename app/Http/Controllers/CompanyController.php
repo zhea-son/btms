@@ -16,7 +16,11 @@ class CompanyController extends Controller
 {
     public function dashboard(){
         $company = Auth::guard('company')->user();
-        return view('company.dashboard', ['company' => $company]);
+        $buses = Bus::where('company_id', $company->id)->get();
+        $routes = Bus::where('company_id', $company->id)->get();
+        $schedules = Schedule::where('company_id', $company->id)->where('completed', false)->get();
+        $trips = Schedule::where('company_id', $company->id)->where('completed', true)->get();
+        return view('company.dashboard', compact('company','buses','routes','schedules','trips'));
     }
 
     public function show_signup(){
@@ -135,9 +139,31 @@ class CompanyController extends Controller
 
     public function my_profile(){
         $company = Auth::guard('company')->user();
+        $array = explode(',',$company->office_location);
+        $buses = Bus::where('company_id', $company->id)->get();
+        $routes = Bus::where('company_id', $company->id)->get();
+        $trips = Schedule::where('company_id', $company->id)->where('completed', true)->get();
         return view('company.profile', [
             'company' => $company,
+            'buses' => $buses,
+            'routes' => $routes,
+            'trips' => $trips,
+            'array' => $array,
         ]);
+    }
+
+    public function edit($id, Request $request){
+        $company = Company::findOrFail($id);
+        // dd($request, $company->company_name);
+        $company->company_name = $request['username'];
+        $company->email = $request['email'];
+        $company->contact = $request['contact'];
+        $company->registration_number = $request['reg_no'];
+        
+        $company->office_location = $request['city'] . ", " . $request['district'];
+
+        $company->save();
+        return back();
     }
 
     
