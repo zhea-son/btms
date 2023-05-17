@@ -49,7 +49,7 @@ class RoutesController extends Controller
             $value = strip_tags($value);
         }
 
-        $formFields['name']= "From ". $formFields['origin']." To ".$formFields['destination']." via. ". $formFields['via'];
+        $formFields['name']= "From ". $formFields['origin']." To ".$formFields['destination'];
         $formFields['company_id'] = Auth::guard('company')->user()->id;
         
         $via = explode(',', $formFields['via']);

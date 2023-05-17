@@ -17,7 +17,7 @@ class CompanyController extends Controller
     public function dashboard(){
         $company = Auth::guard('company')->user();
         $buses = Bus::where('company_id', $company->id)->get();
-        $routes = Bus::where('company_id', $company->id)->get();
+        $routes = Route::where('company_id', $company->id)->get();
         $schedules = Schedule::where('company_id', $company->id)->where('completed', false)->get();
         $trips = Schedule::where('company_id', $company->id)->where('completed', true)->get();
         return view('company.dashboard', compact('company','buses','routes','schedules','trips'));

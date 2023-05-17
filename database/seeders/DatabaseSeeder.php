@@ -22,10 +22,12 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-
-        User::factory()->create();
-        Admin::factory()->create();
-        Company::factory()->create();
+        $this->call(CompanySeeder::class);
+        $this->call(RouteSeeder::class);
+        Bus::factory()->count(50)->create();
+        // User::factory()->create();
+        // Admin::factory()->create();
+        // Company::factory()->create();
 
         // Bus::factory()
         // ->create([

@@ -83,9 +83,10 @@ class BookingsController extends Controller
 
         $fare = $request['fare'];
         $formFields['schedule_id'] = $request['schedule_id'];
+        $schedule = Schedule::findOrFail($request['schedule_id'])->with('bus','route');
         if($request['available_seats']){$available_seats = $request['available_seats']; }
         $formFields['user_id'] = auth()->user()->id;
-
+        $formFields['ticket_no'] = Carbon::createFromFormat('Y-m-d', $schedule->date)->format('Ymd') . '-' .  $schedule->company_id . 'c'. $schedule->id . 's' . $schedule->bus_id . 'b' . $schedule->route_id . 'r';
         if($formFields['seats'] <= $available_seats){
             $formFields['amount'] = $formFields['seats'] * $fare; 
             Booking::create($formFields);

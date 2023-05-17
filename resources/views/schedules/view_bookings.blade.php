@@ -8,6 +8,7 @@
     <h3> Bus Status: @if(!$schedule->completed) At {{ $schedule->status }} @else Completed @endif</h3>
     <table style="border:2px solid black;text-align:center;">
         <tr><th style="border:2px solid black;">S.N.</th>
+            <th style="border:2px solid black;">Ticket No.</th>
             <th style="border:2px solid black;">User</th>
             <th style="border:2px solid black;">Seats Booked</th>
             <th style="border:2px solid black;">Amount to be paid</th>
@@ -16,6 +17,7 @@
         @foreach($bookings as $booking)
             <tr>
                 <td style="border:2px solid black;">{{ $loop->iteration }}</td>
+                <td style="border:2px solid black;">{{ $booking->tikcet_no }}  </td>
                 <td style="border:2px solid black;">{{ $booking->user->name }}</td>
                 <td style="border:2px solid black;">{{ $booking->seats }}</td>
                 <td style="border:2px solid black;">{{ $booking->amount }}</td>

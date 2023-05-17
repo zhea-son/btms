@@ -17,10 +17,10 @@ class BusFactory extends Factory
     public function definition()
     {
         return [
-            'company_id' => 1,
+            'company_id' => fake()->numberBetween(1,10),
             'number_plate' => fake()->unique()->bothify('??-Pra-##-###-??-####'),
             'contact' => fake()->phoneNumber(),
-            'seats' => fake()->numberBetween(15,80),
+            'seats' => fake()->numberBetween(12,80),
             'type' => fake()->randomElement(['Micro','Tourist','Deluxe','Semi-Deluxe']),           
         ];
     }
