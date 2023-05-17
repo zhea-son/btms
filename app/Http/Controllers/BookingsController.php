@@ -114,9 +114,6 @@ class BookingsController extends Controller
                 $booking->bus_status = $booking->status;
             }
         }
-
-        // dd($booking->status);
-        return $bookings;
         
         return view('bookings.my_bookings', compact('bookings'));
     }

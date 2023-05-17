@@ -79,7 +79,11 @@
 
                 </td>
                 <td class="px-6 py-4">
-                    {{ $booking->bus_status }}
+                    @if($booking->schedule->status == "Stand By")
+                        {{ $booking->schedule->status }}
+                    @else
+                        Arrived {{ $booking->schedule->status }}
+                    @endif
                 </td>
                 <td class="px-6 py-4">
                     <ul>

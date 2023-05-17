@@ -5,6 +5,7 @@
     <h1> This is Bookings Info </h1>
     <h3> Seats Booked: {{ $seats_booked }}</h3>
     <h3> Available Seats: {{ $total_seats - $seats_booked }}</h3>
+    <h3> Bus Status: @if(!$schedule->completed) At {{ $schedule->status }} @else Completed @endif</h3>
     <table style="border:2px solid black;text-align:center;">
         <tr><th style="border:2px solid black;">S.N.</th>
             <th style="border:2px solid black;">User</th>
@@ -21,7 +22,11 @@
                 @if ($booking->paid)
                 <td style="border:2px solid black;">Paid</td>
                 @else
-                <td style="border:2px solid black;">UnPaid</td>
+                    @if($booking->payment_unique_id == "Hand Cash")
+                    <td style="border:2px solid black;">Cash on Bus</td>
+                    @else
+                    <td style="border:2px solid black;">Unpaid</td>
+                    @endif
                 @endif
             </tr>
         @endforeach

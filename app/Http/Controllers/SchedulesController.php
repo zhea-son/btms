@@ -207,7 +207,7 @@ public function view_bookings($id){
     $schedule = Schedule::where('id',$id)->with('bus')->first();
     $total_seats = $schedule->bus->seats;
     // dd($total_seats);
-    return view('schedules.view_bookings',compact('bookings','seats_booked','total_seats'));
+    return view('schedules.view_bookings',compact('bookings','schedule','seats_booked','total_seats'));
 }
 
 }
