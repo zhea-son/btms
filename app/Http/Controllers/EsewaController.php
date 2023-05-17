@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booking;
+use Carbon\Carbon;
 
 require '../vendor/autoload.php';
 
+use App\Models\Booking;
 use Cixware\Esewa\Client;
 use Cixware\Esewa\Config;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class EsewaController extends Controller
 
         $booking = Booking::findOrFail($request['booking_id']);
         $booking->payment_unique_id = $pid;
+        $booking->ticket_no = Carbon::createFromFormat('Y-m-d', $booking->schedule->date)->format('Ymd') . '-' .  $booking->schedule->company_id . 'c'. $booking->schedule->id . 's' . $booking->schedule->bus_id . 'b' . $booking->schedule->route_id . 'r' . $booking->id;
         $booking->save();
 
         $esewa->process($booking->payment_unique_id , $booking->amount, 0, 0, 0);

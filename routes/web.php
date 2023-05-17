@@ -63,7 +63,7 @@ Route::get('/search_buses', [BookingsController::class, 'show_search'])->name('s
 Route::post('/search', [BookingsController::class, 'search']);
 Route::post('/booking', [BookingsController::class, 'booking'])->middleware('auth');
 Route::post('/hand-cash', [BookingsController::class, 'pay_on_bus'])->middleware('auth');
-Route::post('/bookings/{booking}/details', [BookingsController::class, 'booking_details'])->middleware('auth');
+Route::get('/bookings/{booking}/details', [BookingsController::class, 'booking_details'])->name('bookings.details')->middleware('auth');
 Route::post('/user/bookings', [BookingsController::class, 'store'])->middleware('auth');
 Route::delete('/user/bookings/{booking}', [BookingsController::class, 'destroy'])->middleware('auth');
 Route::get('/user/my_bookings', [BookingsController::class, 'my_bookings'])->name('my_bookings')->middleware('auth');

@@ -80,13 +80,20 @@ class BookingsController extends Controller
             'seats' => 'required'
         ]);
 
+        $bookings = Booking::where('schedule_id', $request['schedule_id']);
+        if(isset($bookings)){
+            $count = 1;
+        }else{
+            $count = count($bookings)+1;
+        }
+        $same_bookings = $bookings->where('user_id', auth()->user()->id);
 
         $fare = $request['fare'];
         $formFields['schedule_id'] = $request['schedule_id'];
         $schedule = Schedule::findOrFail($request['schedule_id'])->with('bus','route');
         if($request['available_seats']){$available_seats = $request['available_seats']; }
         $formFields['user_id'] = auth()->user()->id;
-        $formFields['ticket_no'] = Carbon::createFromFormat('Y-m-d', $schedule->date)->format('Ymd') . '-' .  $schedule->company_id . 'c'. $schedule->id . 's' . $schedule->bus_id . 'b' . $schedule->route_id . 'r';
+        $formFields['ticket_no'] = Carbon::now()->format('Ymd') . '-' . $request['schedule_id'] . 's' . $count;
         if($formFields['seats'] <= $available_seats){
             $formFields['amount'] = $formFields['seats'] * $fare; 
             Booking::create($formFields);
@@ -97,8 +104,9 @@ class BookingsController extends Controller
         }
     }
 
-    public function booking_details(){
-        return view('bookings.booking_details');
+    public function booking_details($id){
+        $booking = Booking::findOrFail($id);
+        return view('bookings.booking_details', compact('booking'));
     }
 
     public function my_bookings(){
@@ -141,6 +149,7 @@ class BookingsController extends Controller
     public function pay_on_bus(Request $request){
         $booking = Booking::findOrFail($request['booking_id']);
         $booking->payment_unique_id = "Hand Cash";
+        $booking->ticket_no = Carbon::createFromFormat('Y-m-d', $booking->schedule->date)->format('Ymd') . '-' .  $booking->schedule->company_id . 'c'. $booking->schedule->id . 's' . $booking->schedule->bus_id . 'b' . $booking->schedule->route_id . 'r' . $booking->id;
         $booking->save();
 
         return back();

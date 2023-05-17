@@ -56,7 +56,9 @@
                     {{ $booking->schedule->date }}
                 </td>
                 <td class="px-6 py-4">
+                    <a href="{{ route('bookings.details', $booking->id) }}">
                     {{ $booking->schedule->route->name }}
+                    </a>
                 </td>
                 <td class="px-6 py-4">
                     {{ $booking->schedule->company->company_name }}
@@ -90,11 +92,8 @@
                     @if ($booking->paid == true)
 
                     <li class="text-blue-500 px-2 inline-flex items-center md:mb-2 lg:mb-0">
-                        <form action="/booking/{{ $booking->id }}/details" method="post">
-                            @csrf
-                            <input type="hidden" name="booking_id" value="{{ $booking->id }}">
-                            <button type="submit">View</button>
-                        </form>
+                        
+                        <a href="{{ route('bookings.details', $booking->id) }}">View</button>
                     </li>
 
                     @elseif ($booking->payment_unique_id == "Hand Cash")
