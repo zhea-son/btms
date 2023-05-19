@@ -63,7 +63,6 @@ class SchedulesController extends Controller
 
         $schedule = Schedule::where('bus_id', $formFields['bus_id'])
                                 ->where('date', $formFields['date'])
-                                ->where('route_id', $formFields['route_id'])
                                 ->first();
             
         return $schedule;
