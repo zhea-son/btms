@@ -15,6 +15,7 @@
     <link href="{{ asset('template/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
     <!-- Popper -->
     <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="{{ asset('global_assets/js/plugins/notifications/pnotify.min.js') }}"></script>
     <script src="{{ asset('global_assets/js/demo_pages/extra_pnotify.js') }}"></script>
@@ -48,7 +49,7 @@
    <!-- plugin for charts  -->
    <script src="{{ asset('template/assets/js/plugins/chartjs.min.js') }}" async></script>
    <!-- plugin for scrollbar  -->
-   {{-- <script src="{{ asset('template/assets/js/plugins/perfect-scrollbar.min.js') }}" async></script> --}}
+   <script src="{{ asset('template/assets/js/plugins/perfect-scrollbar.min.js') }}" async></script>
    <!-- main script file  -->
    <script src="{{ asset('template/assets/js/argon-dashboard-tailwind.js?v=1.0.1') }}" async></script>
  </html>

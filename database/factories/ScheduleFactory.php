@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,9 +18,17 @@ class ScheduleFactory extends Factory
     public function definition()
     {
         return [
-            'date' => fake()->date(),
-            'departure_time' => fake()->time(),
-            'fare' => fake()->numberBetween(300,2000),
+            'company_id' => fake()->numberBetween(1,10),
+            'bus_id' => fake()->numberBetween(1,25),
+            'route_id' => fake()->numberBetween(1,29),
+            'date' => Carbon::today()->startOfWeek()->addDays(rand(0, 6))->format('Y-m-d'),
+            'departure_time' => fake()->time('H:i'),
+            'fare' => fake()->numberBetween(300,4000),
+            'estimated_time' => fake()->numberBetween(3,24),
+            'status' => 'Stand By',
+            'no_of_passengers' => null,
+            'income' => null,
+            'completed' => false,
         ];
     }
 }

@@ -22,7 +22,7 @@ class SchedulesController extends Controller
         
         return view('schedules.index', [
             // 'routes' => Bus::latest()->filter(request(['to','from','type']))->Simplepaginate(6)
-            'schedules' => Schedule::with(['bus','route'])->latest()->filter(request(['place','type']))->Simplepaginate(14)
+            'schedules' => Schedule::with(['bus','route'])->latest()->filter(request(['place','type']))->Simplepaginate(9)
         ]);
     }
 

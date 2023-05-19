@@ -17,22 +17,41 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        // return [
-        //     'name' => fake()->name(),
-        //     'email' => fake()->unique()->safeEmail(),
-        //     'email_verified_at' => now(),
-        //     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        //     'remember_token' => Str::random(10),
-        // ];
-
         return [
-            'name' => 'User1',
-            'email' => 'user1@btms.com',
-            'contact' => '9863796379',
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             // 'remember_token' => Str::random(10),
         ];
+
+        // return [
+        //     [
+        //     'name' => 'Ranjan Khanal',
+        //     'email' => 'ranjan@btms.com',
+        //     'contact' => '9863796379',
+        //     'email_verified_at' => now(),
+        //     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        //     // 'remember_token' => Str::random(10),
+        //     ], 
+        //     [
+        //         'name' => 'Reetesh Choudary',
+        //         'email' => 'reetesh@btms.com',
+        //         'contact' => '9809229946',
+        //         'email_verified_at' => now(),
+        //         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        //         // 'remember_token' => Str::random(10),
+        //     ],
+        //     [
+        //         'name' => 'Sabin Adhikari',
+        //         'email' => 'sabin@btms.com',
+        //         'contact' => '9845023545',
+        //         'email_verified_at' => now(),
+        //         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        //         // 'remember_token' => Str::random(10),
+        //     ]
+        // ];
+        
     }
 
     /**

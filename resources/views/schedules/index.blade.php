@@ -15,7 +15,7 @@
         <div class="container px-5 py-24 mx-auto">
             <div class="flex flex-wrap -mx-4 -my-8">
                 @foreach ($schedules as $schedule)
-              <div class="py-8 px-4 lg:w-1/3 border border-teal-500">
+              <div class="py-8 px-4 lg:w-1/3 border-4 border-teal-500">
                 <div class="h-full flex items-start">
                   
                   <div class="flex-grow pl-6">
@@ -42,11 +42,11 @@
                     </li>
                     </ul>
                     @php $via = explode(',', $schedule->route->via) @endphp
-                    <ul class="flex">
+                    <ul class="flex flex-wrap">
                       @foreach ($via as $item)
                           
                       <li
-                      class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
+                      class="flex items-center justify-center bg-teal-500 text-white rounded-xl py-1 px-3 mr-2 text-xs"
                       >
                       <a href="/schedules/?place={{$item}}">{{$item}}</a>
                     </li>
