@@ -81,10 +81,13 @@ Route::get('/company/dashboard', [CompanyController::class, 'dashboard'])->name(
 Route::get('/company/signup', [CompanyController::class, 'show_signup'])->name('company.signup')->middleware('guest');
 
 Route::get('/company/login', [CompanyController::class, 'show_login'])->name('company.login')->middleware('guest');
+Route::get('/bus/login', [BusesController::class, 'show_bus_login'])->name('bus.login');
 
 Route::post('/company/register/new', [CompanyController::class, 'register'])->name('company.register')->middleware('guest');
 
 Route::post('/company/authenticate', [CompanyController::class, 'authenticate'])->name('company.authenticate');
+Route::post('/bus/authenticate', [BusesController::class, 'authenticate'])->name('bus.authenticate');
+Route::get('/bus/{bus}/schedules', [BusesController::class, 'schedules'])->name('buses.schedules');
 
 Route::get('/company/logout', [CompanyController::class, 'logout'])->name('company.logout')->middleware('company');
 

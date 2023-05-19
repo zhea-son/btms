@@ -78,11 +78,7 @@
                         <li
                                     class="text-blue-500 px-2 inline-flex items-center md:mb-2 lg:mb-0"
                                 >
-                                <form method="POST" action="/bookings/{{$booking->id}}">
-                                    @csrf
-                                    @method('PUT')
-                                    <button>View</button>        
-                                  </form>
+                                <a href="{{ route('bookings.details', $booking->id) }}">View</button>
                         </li>
                     </ul>
                 </td>

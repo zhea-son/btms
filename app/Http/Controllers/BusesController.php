@@ -149,4 +149,27 @@ class BusesController extends Controller
         $bus->delete();
         return back()->with('message', 'Bus deleted successfully!');
     }
+
+    public function show_bus_login(){
+        return view('buses.login');
+    }
+
+    public function authenticate(Request $request){
+        $formFields = $request->validate([
+            'contact' => 'required',
+            'password' => 'required',
+        ]);
+        $bus = Bus::where('contact', $formFields['contact'])->first();
+        if($bus->number_plate == $formFields['password']){
+            return redirect()->route('buses.schedules', $bus->id);
+        }else{
+            return response()->json(['message' => 'Invalid Bus Contact and Password']);
+        }
+    }
+
+    public function schedules($id){
+        $schedules = Schedule::where('bus_id', $id)->where('completed', false)->get();
+        $bus = Bus::findOrFail($id);
+        return view('buses.schedules', compact('schedules','bus'));
+    }
 }
