@@ -9,7 +9,11 @@
 
     <div class="flex flex-col text-center w-full mb-12">
         <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-teal-700">Bus Ticketing and Transport Management</h1>
-        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">This is a Bus Ticketing and Fleet Management Software designed for better transport management. Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun deep jianbing selfies heirloom prism food truck ugh squid celiac humblebrag.</p>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+          Welcome to our Bus ticketing and Transport Management System. Experience seamless travel with our state-of-the-art platform
+          that revolutionizes the way you book and manage your bus tickets. Whather your're a frequent traveler or planning a one-time trip,
+          we've got you covered with our easy-to-use and efficient system.
+        </p>
       </div>
       @auth
 
@@ -100,7 +104,12 @@
   <div class="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
     <div class="w-full sm:p-4 px-4 mb-6">
       <h1 class="title-font font-medium text-3xl mb-2 text-teal-700">Succesful in Delivering high quality services!</h1>
-      <div class="leading-relaxed">Pour-over craft beer pug drinking vinegar live-edge gastropub, keytar neutra sustainable fingerstache kickstarter.</div>
+      <div class="leading-relaxed">
+        <p>
+        At our Bus Ticketing and Transport Management System, we take immense pride in our track record of delivering high-quality services to uor valued customers.
+        With a focus on excellence and customer satisfaction, we have consistently exceeded expectations and earned the trust of travelers acreoss the board.
+        </P>
+      </div>
     </div>
     <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
       <h2 class="title-font text-center font-medium text-3xl text-gray-900">{{ $users }}</h2>
