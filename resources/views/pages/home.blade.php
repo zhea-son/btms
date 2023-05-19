@@ -8,7 +8,7 @@
 <div class="container px-5 py-12 mx-auto">
 
     <div class="flex flex-col text-center w-full mb-12">
-        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-teal-700">Bus Ticketing and Transport Management</h1>
+        <h1 class="sm:text-3xl text-2xl font-medium title-font md:text-5xl mb-4 text-teal-700">Bus Ticketing and Transport Management</h1>
         <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
           Welcome to our Bus ticketing and Transport Management System. Experience seamless travel with our state-of-the-art platform
           that revolutionizes the way you book and manage your bus tickets. Whather your're a frequent traveler or planning a one-time trip,
