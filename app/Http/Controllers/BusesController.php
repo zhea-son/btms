@@ -73,7 +73,7 @@ class BusesController extends Controller
         // $formFields['author'] = auth()->user()->name;
         Bus::create($formFields);
 
-        return redirect('/company/buses')->with('message', "Bus created successfully!");
+        return redirect('/company/buses')->with('message', "Bus added successfully!");
     }
 
     /**

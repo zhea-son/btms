@@ -55,7 +55,6 @@ class SchedulesController extends Controller
             'route_id' => 'required', 
             'estimated_time' => 'required',
         ]);
-        
         foreach ($formFields as &$value) {
             $value = strip_tags($value);
         }
@@ -63,13 +62,13 @@ class SchedulesController extends Controller
         $formFields['company_id'] = Auth::guard('company')->user()->id;
 
         $schedule = Schedule::where('bus_id', $formFields['bus_id'])
-                                ->where('route_id', $formFields['route_id'])
                                 ->where('date', $formFields['date'])
                                 ->first();
             
+        return $schedule;
 
         if($schedule){
-            return response()->json(['message' => 'Bus is not available for the specified date and route.'], 400);
+            return back()->with('error' , 'Bus is not available for the specified date and route.');
         }
         
         else{

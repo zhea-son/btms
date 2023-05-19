@@ -7,6 +7,9 @@
     <title>@yield('title')</title>
     <script src="//unpkg.com/alpinejs" defer></script>
 
+    <script src="{{ asset('global_assets/js/plugins/notifications/pnotify.min.js') }}"></script>
+    <script src="{{ asset('global_assets/js/demo_pages/extra_pnotify.js') }}"></script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
 </head>
@@ -20,16 +23,23 @@
         </main>
             <hr>
         <footer>@include('layouts.footer')</footer>
-        @if(session()->has('message'))
 
-        <div x-data="{ show: true}" x-init="setTimeout(() => show=false, 3000)" x-show="show" class="fixed top-0 left-1/2 transform -translate-x-1/2 bg-teal-500 text-white-500 px-48 py-3">
-        <p>
-            {{session('message')}}
-        </p>
-        </div>
-
+        @if (Session::has('message'))
+            <p id="pnotify-solid-success" hidden>{{ Session::get('message') }}</p>
         @endif
-    
+        @if (Session::has('errors'))
+            <p id="pnotify-solid-warning" hidden>{{ Session::get('errors')->first() }}</p>
+        @endif    
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#pnotify-solid-success").trigger('click');
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#pnotify-solid-warning").trigger('click');
+            });
+        </script>
     
 </body>
 </html>
