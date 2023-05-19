@@ -16,12 +16,25 @@ class BusFactory extends Factory
      */
     public function definition()
     {
+        $type = fake()->randomElement(['Micro','Tourist','Deluxe','Semi-Deluxe']);
         return [
             'company_id' => fake()->numberBetween(1,10),
             'number_plate' => fake()->unique()->bothify('??-Pra-##-###-??-####'),
             'contact' => fake()->phoneNumber(),
-            'seats' => fake()->numberBetween(12,80),
-            'type' => fake()->randomElement(['Micro','Tourist','Deluxe','Semi-Deluxe']),           
+            'seats' => function () use ($type) {
+                if ($type === 'Micro') {
+                    return 16;
+                } elseif ($type === 'Tourist') {
+                    return 40;
+                } elseif ($type === 'Deluxe') {
+                    return 45;
+                } elseif ($type === 'Semi-Deluxe') {
+                    return 50;
+                } else {
+                    return random_int(12, 50);
+                }
+            },
+            'type' => $type ,          
         ];
     }
 }

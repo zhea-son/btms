@@ -266,11 +266,11 @@
                 <div class="flex flex-row -mx-3">
                   <div class="flex-none w-2/3 max-w-full px-3">
                     <div>
-                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Total Buses</p>
-                      <h5 class="mb-2 font-bold dark:text-white">{{ count($buses) }}</h5>
+                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Total Revenue</p>
+                      <h5 class="mb-2 font-bold dark:text-white">Rs. 1,80,260</h5>
                       <p class="mb-0 dark:text-white dark:opacity-60">
-                        <span class="text-sm font-bold leading-normal text-emerald-500">+55%</span>
-                        since yesterday
+                        <span class="text-sm font-bold leading-normal text-emerald-500">+5%</span>
+                        since last month
                       </p>
                     </div>
                   </div>
@@ -291,10 +291,10 @@
                 <div class="flex flex-row -mx-3">
                   <div class="flex-none w-2/3 max-w-full px-3">
                     <div>
-                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Total Routes</p>
-                      <h5 class="mb-2 font-bold dark:text-white">{{ count($routes) }}</h5>
+                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Total Profit</p>
+                      <h5 class="mb-2 font-bold dark:text-white">Rs. 1,26,500</h5>
                       <p class="mb-0 dark:text-white dark:opacity-60">
-                        <span class="text-sm font-bold leading-normal text-emerald-500">+3%</span>
+                        <span class="text-sm font-bold leading-normal text-emerald-500">+9%</span>
                         since last week
                       </p>
                     </div>
@@ -316,11 +316,11 @@
                 <div class="flex flex-row -mx-3">
                   <div class="flex-none w-2/3 max-w-full px-3">
                     <div>
-                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Upcoming Schedules</p>
-                      <h5 class="mb-2 font-bold dark:text-white">{{ count($schedules) }}</h5>
+                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Happy Travellers</p>
+                      <h5 class="mb-2 font-bold dark:text-white">1200+</h5>
                       <p class="mb-0 dark:text-white dark:opacity-60">
                         <span class="text-sm font-bold leading-normal text-red-600">-2%</span>
-                        since last quarter
+                        since last month
                       </p>
                     </div>
                   </div>
@@ -341,8 +341,8 @@
                 <div class="flex flex-row -mx-3">
                   <div class="flex-none w-2/3 max-w-full px-3">
                     <div>
-                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Completed Trips</p>
-                      <h5 class="mb-2 font-bold dark:text-white">{{ count($trips) }}</h5>
+                      <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Upcoming Schedules</p>
+                      <h5 class="mb-2 font-bold dark:text-white">{{ count($schedules) }}</h5>
                       <p class="mb-0 dark:text-white dark:opacity-60">
                         <span class="text-sm font-bold leading-normal text-emerald-500">+5%</span>
                         than last month
@@ -431,7 +431,7 @@
             <div class="relative flex flex-col min-w-0 break-words bg-white border-0 border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl dark:bg-gray-950 border-black-125 rounded-2xl bg-clip-border">
               <div class="p-4 pb-0 mb-0 rounded-t-4">
                 <div class="flex justify-between">
-                  <h6 class="mb-2 dark:text-white">Sales by Country</h6>
+                  <h6 class="mb-2 dark:text-white">Profit by Bus-Type</h6>
                 </div>
               </div>
               <div class="overflow-x-auto">
@@ -444,21 +444,21 @@
                             <img src="{{ asset('template/assets/img/icons/flags/US.png') }}" alt="Country flag" />
                           </div>
                           <div class="ml-6">
-                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Country:</p>
-                            <h6 class="mb-0 text-sm leading-normal dark:text-white">United States</h6>
+                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Type:</p>
+                            <h6 class="mb-0 text-sm leading-normal dark:text-white">Tourist</h6>
                           </div>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Sales:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">2500</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Trips:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">23</h6>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Value:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">$230,900</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Proft:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Rs. 25700</h6>
                         </div>
                       </td>
                       <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
@@ -475,21 +475,21 @@
                             <img src="{{ asset('template/assets/img/icons/flags/DE.png') }}" alt="Country flag" />
                           </div>
                           <div class="ml-6">
-                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Country:</p>
-                            <h6 class="mb-0 text-sm leading-normal dark:text-white">Germany</h6>
+                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Type:</p>
+                            <h6 class="mb-0 text-sm leading-normal dark:text-white">Semi-Deluxe</h6>
                           </div>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Sales:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">3.900</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Trips:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">55</h6>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Value:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">$440,000</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Profit:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Rs. 51,000</h6>
                         </div>
                       </td>
                       <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
@@ -506,21 +506,21 @@
                             <img src="{{ asset('template/assets/img/icons/flags/GB.png') }}" alt="Country flag" />
                           </div>
                           <div class="ml-6">
-                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Country:</p>
-                            <h6 class="mb-0 text-sm leading-normal dark:text-white">Great Britain</h6>
+                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Type:</p>
+                            <h6 class="mb-0 text-sm leading-normal dark:text-white">Deluxe</h6>
                           </div>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Sales:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">1.400</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Trips:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">45</h6>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Value:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">$190,700</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Profit:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Rs.40,000</h6>
                         </div>
                       </td>
                       <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
@@ -537,21 +537,21 @@
                             <img src="{{ asset('template/assets/img/icons/flags/BR.png') }}" alt="Country flag" />
                           </div>
                           <div class="ml-6">
-                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Country:</p>
-                            <h6 class="mb-0 text-sm leading-normal dark:text-white">Brasil</h6>
+                            <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Type:</p>
+                            <h6 class="mb-0 text-sm leading-normal dark:text-white">Micro</h6>
                           </div>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-0 whitespace-nowrap">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Sales:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">562</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Trips:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">78</h6>
                         </div>
                       </td>
                       <td class="p-2 align-middle bg-transparent border-0 whitespace-nowrap">
                         <div class="text-center">
-                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Value:</p>
-                          <h6 class="mb-0 text-sm leading-normal dark:text-white">$143,960</h6>
+                          <p class="mb-0 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Profit:</p>
+                          <h6 class="mb-0 text-sm leading-normal dark:text-white">Rs. 34,000</h6>
                         </div>
                       </td>
                       <td class="p-2 text-sm leading-normal align-middle bg-transparent border-0 whitespace-nowrap">
@@ -579,8 +579,8 @@
                         <i class="text-white ni ni-mobile-button relative top-0.75 text-xxs"></i>
                       </div>
                       <div class="flex flex-col">
-                        <h6 class="mb-1 text-sm leading-normal text-slate-700 dark:text-white">Devices</h6>
-                        <span class="text-xs leading-tight dark:text-white/80">250 in stock, <span class="font-semibold">346+ sold</span></span>
+                        <h6 class="mb-1 text-sm leading-normal text-slate-700 dark:text-white">Trips Made</h6>
+                        <span class="text-xs leading-tight dark:text-white/80">150 </span>
                       </div>
                     </div>
                     <div class="flex">
@@ -593,8 +593,8 @@
                         <i class="text-white ni ni-tag relative top-0.75 text-xxs"></i>
                       </div>
                       <div class="flex flex-col">
-                        <h6 class="mb-1 text-sm leading-normal text-slate-700 dark:text-white">Tickets</h6>
-                        <span class="text-xs leading-tight dark:text-white/80">123 closed, <span class="font-semibold">15 open</span></span>
+                        <h6 class="mb-1 text-sm leading-normal text-slate-700 dark:text-white">Total Schedules</h6>
+                        <span class="text-xs leading-tight dark:text-white/80">167</span>
                       </div>
                     </div>
                     <div class="flex">
@@ -607,8 +607,8 @@
                         <i class="text-white ni ni-box-2 relative top-0.75 text-xxs"></i>
                       </div>
                       <div class="flex flex-col">
-                        <h6 class="mb-1 text-sm leading-normal text-slate-700 dark:text-white">Error logs</h6>
-                        <span class="text-xs leading-tight dark:text-white/80">1 is active, <span class="font-semibold">40 closed</span></span>
+                        <h6 class="mb-1 text-sm leading-normal text-slate-700 dark:text-white">Total Routes</h6>
+                        <span class="text-xs leading-tight dark:text-white/80">{{ count($routes) }} </span>
                       </div>
                     </div>
                     <div class="flex">
@@ -621,8 +621,8 @@
                         <i class="text-white ni ni-satisfied relative top-0.75 text-xxs"></i>
                       </div>
                       <div class="flex flex-col">
-                        <h6 class="mb-1 text-sm leading-normal text-slate-700 dark:text-white">Happy users</h6>
-                        <span class="text-xs leading-tight dark:text-white/80"><span class="font-semibold">+ 430 </span></span>
+                        <h6 class="mb-1 text-sm leading-normal text-slate-700 dark:text-white">Total Buses</h6>
+                        <span class="text-xs leading-tight dark:text-white/80"><span class="font-semibold">{{ count($buses) }}</span></span>
                       </div>
                     </div>
                     <div class="flex">

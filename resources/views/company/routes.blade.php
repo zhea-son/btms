@@ -201,7 +201,7 @@
             <div class="flex flex-wrap -mx-4 -my-8">
                 @foreach ($routes as $route)
                   @php $viaarray = explode(',', $route->via) @endphp
-              <div class="ml-4 py-4 lg:w-1/3 border border-teal-500">
+              <div class="mx-4 mt-4 py-4 lg:w-1/3 border-2 border-teal-500" style="width:30% !important;">
                 <div class="h-full flex items-start">
                   
                   <div class="flex-grow pl-6">
@@ -220,11 +220,11 @@
                         <a href="/routes/?destination={{$route->destination}}">{{$route->destination}}</a>
                     </li>
                     </ul>
-                    <ul class="flex">
+                    <ul class="flex flex-wrap">
                       @foreach ($viaarray as $item)
                           
                       <li
-                      class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-2 mr-1 mt-1 text-xs"
+                      class="flex items-center justify-center bg-teal-500 text-white rounded-xl py-1 px-2 mr-1 mt-1 text-xs"
                       >
                       <a href="/routes/?place={{$item}}">{{$item}}</a>
                     </li>
