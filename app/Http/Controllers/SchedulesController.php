@@ -64,8 +64,8 @@ class SchedulesController extends Controller
         $schedules = Schedule::where('bus_id', $formFields['bus_id'])
                                 ->where('date', $formFields['date'])
                                 ->get();
-        if(count($schedules) == 0){
-            $prev_schedule = $schedules;
+        if(count($schedules) == 1){
+            $prev_schedule = $schedules->first();
         }
         elseif(count($schedules) > 1){
             foreach($schedules as $sch){
@@ -74,14 +74,17 @@ class SchedulesController extends Controller
                 }
             }
         }
+        // return $prev_schedule->id;
 
-        $time = explode(':',$prev_schedule->departure_time);
-        $newHours = (intval($time[0]) + intval($prev_schedule->estimated_time)) % 24; 
-        $min_start_time =  sprintf("%02d:%02d", strval($newHours), $time[1]);
-        $min_time = strtotime($min_start_time) - strtotime('00:00');
-        $dept_time = strtotime($formFields['departure_time']) - strtotime('00:00');
-         
-        if(!$prev_schedule->completed){
+        if(isset($prev_schedule)){
+            $time = explode(':',$prev_schedule->departure_time);
+            $newHours = (intval($time[0]) + intval($prev_schedule->estimated_time)) % 24; 
+            $min_start_time =  sprintf("%02d:%02d", strval($newHours), $time[1]);
+            $min_time = strtotime($min_start_time) - strtotime('00:00');
+            $dept_time = strtotime($formFields['departure_time']) - strtotime('00:00');
+        }
+        
+        if(isset($prev_schedule) && !$prev_schedule->completed){
             if($min_time > $dept_time){
                 return response()->json(['message' => 'Bus Schedule can only be started after ' . $min_start_time . '.']);
             }else{
@@ -89,6 +92,7 @@ class SchedulesController extends Controller
                 return redirect('/company/schedules')->with('message', "Schedule created successfully!");
             }
         }
+    
         else{
             Schedule::create($formFields);
             return redirect('/company/schedules')->with('message', "Schedule created successfully!");
@@ -196,7 +200,7 @@ public function schedule_info(Schedule $schedule){
     return view('schedules.scheduleinfo', ['schedule'=> $schedule,
                                             'vial' => $vial,
                                             'count' => $count,
-]);
+    ]);
 }
 
 public function update_status($id, Request $request){

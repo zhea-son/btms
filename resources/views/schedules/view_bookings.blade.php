@@ -17,7 +17,7 @@
         @foreach($bookings as $booking)
             <tr>
                 <td style="border:2px solid black;">{{ $loop->iteration }}</td>
-                <td style="border:2px solid black;">{{ $booking->tikcet_no }}  </td>
+                <td style="border:2px solid black;">{{ $booking->ticket_no }}  </td>
                 <td style="border:2px solid black;">{{ $booking->user->name }}</td>
                 <td style="border:2px solid black;">{{ $booking->seats }}</td>
                 <td style="border:2px solid black;">{{ $booking->amount }}</td>
