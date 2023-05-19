@@ -58,23 +58,40 @@ class SchedulesController extends Controller
         foreach ($formFields as &$value) {
             $value = strip_tags($value);
         }
-
+        $path = Route::where('id', $formFields['route_id'])->first();
         $formFields['company_id'] = Auth::guard('company')->user()->id;
 
-        $schedule = Schedule::where('bus_id', $formFields['bus_id'])
+        $schedules = Schedule::where('bus_id', $formFields['bus_id'])
                                 ->where('date', $formFields['date'])
-                                ->first();
-            
-        return $schedule;
-
-        if($schedule){
-            return back()->with('error' , 'Bus is not available for the specified date and route.');
+                                ->get();
+        if(count($schedules) == 0){
+            $prev_schedule = $schedules;
         }
-        
+        elseif(count($schedules) > 1){
+            foreach($schedules as $sch){
+                if($sch->route->destination == $path->origin){
+                    $prev_schedule = $sch;
+                }
+            }
+        }
+
+        $time = explode(':',$prev_schedule->departure_time);
+        $newHours = (intval($time[0]) + intval($prev_schedule->estimated_time)) % 24; 
+        $min_start_time =  sprintf("%02d:%02d", strval($newHours), $time[1]);
+        $min_time = strtotime($min_start_time) - strtotime('00:00');
+        $dept_time = strtotime($formFields['departure_time']) - strtotime('00:00');
+         
+        if(!$prev_schedule->completed){
+            if($min_time > $dept_time){
+                return response()->json(['message' => 'Bus Schedule can only be started after ' . $min_start_time . '.']);
+            }else{
+                Schedule::create($formFields);
+                return redirect('/company/schedules')->with('message', "Schedule created successfully!");
+            }
+        }
         else{
             Schedule::create($formFields);
             return redirect('/company/schedules')->with('message', "Schedule created successfully!");
-
         }
 
     }
