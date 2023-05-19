@@ -25,7 +25,38 @@ class DatabaseSeeder extends Seeder
         $this->call(CompanySeeder::class);
         $this->call(RouteSeeder::class);
         Bus::factory()->count(50)->create();
-        // User::factory()->create();
+        Schedule::factory()->count(25)->create();
+
+        User::factory()->create(
+            [
+                'name' => 'Ranjan Khanal',
+                'email' => 'ranjan@btms.com',
+                'contact' => '9863796379',
+                'email_verified_at' => now(),
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                // 'remember_token' => Str::random(10),
+                ]
+        );
+        User::factory()->create(
+            [
+                'name' => 'Reetesh Choudary',
+                'email' => 'reetesh@btms.com',
+                'contact' => '9809229946',
+                'email_verified_at' => now(),
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                // 'remember_token' => Str::random(10),
+            ]
+        );
+        User::factory()->create(
+            [
+                'name' => 'Sabin Adhikari',
+                'email' => 'sabin@btms.com',
+                'contact' => '9845023545',
+                'email_verified_at' => now(),
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                // 'remember_token' => Str::random(10),
+            ]
+        );
         // Admin::factory()->create();
         // Company::factory()->create();
 

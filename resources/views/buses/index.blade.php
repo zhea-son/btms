@@ -40,10 +40,10 @@
             </li>
             </ul>
             @php $via = explode(',', $schedule->route->via) @endphp
-            <ul class="flex">
+            <ul class="flex flex-wrap">
             @foreach ($via as $item)
             <li
-                class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-2 mr-1 mt-1 text-xs"
+                class="flex items-center justify-center bg-teal-500 text-white rounded-xl py-1 px-2 mr-1 mt-1 text-xs"
                 >
                 <a href="/buses/?place={{$item}}">{{$item}}</a>
             </li>

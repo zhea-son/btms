@@ -15,6 +15,7 @@
 -->
 @extends('company.master')
 @section('title','Company Dashboard')
+
 @section('content')
   <body class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
     <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
@@ -372,8 +373,8 @@
                 </p>
               </div>
               <div class="flex-auto p-4">
-                <div>
-                  <canvas id="chart-line" height="300"></canvas>
+                <div id="chartContainer">
+                  <canvas id="myChart" max-height="300px"></canvas>
                 </div>
               </div>
             </div>
@@ -740,6 +741,35 @@
         </div>
       </div>
     </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Get the chart container element
+        var chartContainer = document.getElementById('chartContainer');
+    
+        // Create a new chart instance
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+          type: 'bar', // Specify the chart type (e.g., bar, line, pie, etc.)
+          data: {
+            labels: ['Micro', 'Deluxe', 'Semi-Deluxe', 'Tourist'], // Provide labels for the chart
+            datasets: [{
+              label: 'Trips', // Label for the dataset
+              data: [78, 45, 55, 23], // Provide the data values
+              backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(255, 144, 0, 0.2)'], // Set the background color for the bars
+              borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(75, 192, 192, 1)', 'rgba(255, 144, 0, 1)'], // Set the border color for the bars
+              borderWidth: 1 // Set the border width for the bars
+            }]
+          },
+          options: {
+            responsive: true // Enable responsiveness for the chart
+          }
+        });
+    
+        // Append the chart to the container element
+        chartContainer.appendChild(myChart.canvas);
+      });
+    </script>
   </body>
  
   @endsection
